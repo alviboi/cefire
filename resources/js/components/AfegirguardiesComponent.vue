@@ -38,12 +38,12 @@
                 <div>{{ (item+(item2-1)*7)-primer_dia+1 }}</div>
                 <div class="form-group">
                     <label for="exampleSelect">MATÍ</label>
-                    <select class="custom-select" :id="'Mss'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)">
+                    <select @change="onChange($event,'Manyana',((item+(item2-1)*7)-primer_dia+1))" class="custom-select" :id="'Mss'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)">
                         <option>No hi ha cap escollit</option>
                         <option v-for="item5 in assesors" :key="item5.id" :value="item5.Nid_Asesor">{{item5.name}}</option>
                     </select>
                     <label for="exampleSelect">VESPRADA</label>
-                    <select class="custom-select" :id="'Vss'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)">
+                    <select @change="onChange($event,'Tarde',((item+(item2-1)*7)-primer_dia+1))" class="custom-select" :id="'Vss'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)">
                         <option>No hi ha cap escollit</option>
                         <option v-for="item5 in assesors" :key="item5.id" :value="item5.Nid_Asesor">{{item5.name}}</option>
                     </select>
@@ -52,9 +52,6 @@
                 <template v-else>
                     <div></div>
                 </template>
-
-
-
               </div>
             </div>
           </div>
@@ -105,9 +102,28 @@
 </template>
 
 <script>
+(function() {
+    var days = ['D','L','M','X','J','V','S'];
+
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    Date.prototype.getMonthName = function() {
+        return months[ this.getMonth() ];
+    };
+    Date.prototype.getDayName = function() {
+        return days[ this.getDay() ];
+    };
+})();
+
+var now = new Date();
+
+var day = now.getDayName();
+var month = now.getMonthName();
 export default {
   data() {
     return {
+        select1: "",
+        select2: "",
       assesors: [],
       avui: new Date(),
       guardies: null,
@@ -169,8 +185,13 @@ export default {
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
     },
+    onChange(event, mv, dia) {
+        let dia_escollit = new Date(this.any, this.mes, dia);
+
+            console.log(event.target.value + " " + event.target.id + " " + mv + " " + dia_escollit.getWeek() + " " + dia_escollit.getDayName())
+        },
     posa_guardia(a, b, id) {
-      alert(id);
+      //alert(id);
       $("#ss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
       //$("#ss" + a + "d" + b).value(id);
       //$('option:selected', '"#ss" + a + "d" + b').removeAttr('selected');

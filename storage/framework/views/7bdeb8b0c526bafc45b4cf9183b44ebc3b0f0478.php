@@ -48,9 +48,17 @@
                             <a class="nav-link" href="./permisos_demanats">Permisos</a>
                         </li>
 
-                        <?php if(Auth::user()->Perfil==0): ?>
+                        <?php if(Auth::user()->Perfil==2 || Auth::user()->Perfil==1): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="./afegir_guardies">Afegix guàrdies</a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if(Auth::user()->Perfil==1): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./control_usuaris">Control Usuaris</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./permisos_usuaris">Permisos tots Usuaris</a>
                         </li>
                         <?php endif; ?>
                         <?php endif; ?>

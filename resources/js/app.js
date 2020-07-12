@@ -10,6 +10,7 @@ Vue.component('calendarg-component', require('./components/CalendargComponent.vu
 Vue.component('update-component', require('./components/UpdateComponent.vue').default);
 Vue.component('afegirguardies-component', require('./components/AfegirguardiesComponent.vue').default);
 Vue.component('permisos-component', require('./components/PermisosComponent.vue').default);
+Vue.component('controlusuaris-component', require('./components/ControlusuarisComponent.vue').default);
 
 
 const app = new Vue({

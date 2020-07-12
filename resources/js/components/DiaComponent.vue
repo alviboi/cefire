@@ -13,10 +13,10 @@
                         <i class="fas fa-umbrella-beach"></i>
                     </button>
                     <div class="dropdown-menu">
-                        <form class="px-2 py-2">
+                        <div class="px-2 py-2">
                                 <label for="exampleDropdownFormEmail1">Quin dia compenses?</label>
                                 <input @keyup.enter.prevent="cefire('COMPENSA('+fecha_in+')')" class="form-control d-inline" id="exampleDropdownFormEmail1" type="date" v-model="fecha_in">
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="dropdown d-inline">
@@ -24,11 +24,11 @@
                         <i class="fas fa-school"></i>
                     </button>
                     <div class="dropdown-menu">
-                        <form class="px-2 py-2">
+                        <div class="px-2 py-2">
 
                                 <label for="exampleDropdownFormEmail1">Quin centre?</label>
                                 <input @keyup.enter.prevent="cefire('VISITA '+centre_in)" class="form-control d-inline" id="exampleDropdownFormEmail1" placeholder="Centre" v-model="centre_in">
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <input name="arxiu_pujar" @change="este()" :id="fileUpload" type="file" hidden>
@@ -182,7 +182,7 @@
 .wrapper{
     background: #eee;
     border: 1px solid #999;
-    width: 400px;
+    width: 450px;
     float:left;
     //display: flexbox;
 }
@@ -190,6 +190,7 @@
     background: linear-gradient(to bottom, #e5e5e5 0%,#f2f2f2 100%);
     border:none;
     width:100%;
+    height: 150px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     //border-bottom: 1px dotted #999;

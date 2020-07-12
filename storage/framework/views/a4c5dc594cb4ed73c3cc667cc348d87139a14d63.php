@@ -1,4 +1,7 @@
 <?php $__env->startSection('content'); ?>
+<?php
+use App\User;
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,6 +65,14 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="NidAsesor" class="col-md-4 col-form-label text-md-right">Numero Asesor</label>
+
+                            <div class="col-md-6">
+                                <input id="Nid_Asesor" type="number" class="form-control" name="Nid_Asesor" value="<?php echo e(User::max('Nid_Asesor')+1); ?>" required readonly>
                             </div>
                         </div>
 

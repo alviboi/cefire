@@ -61,4 +61,21 @@ class UserController extends Controller
         // }
     }
 
+    public function actualitza_perfil (Request $request)
+    {
+        //
+
+        User::where('id',$request->id)->update(['Perfil'=>$request->perfil]);
+
+        return "Perfil actualitzat";
+    }
+    public function borra_perfil (Request $request)
+    {
+        //
+
+        User::destroy($request->id);
+
+        return "Perfil borrat";
+    }
+
 }
