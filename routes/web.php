@@ -59,3 +59,5 @@ Route::post('actualitza_perfil/','UserController@actualitza_perfil')->name('actu
 
 Route::post('borra_perfil/','UserController@borra_perfil')->name('borra_perfil')->middleware('auth');
 
+Route::post('afg_guardia/','HorarioController@afg_guardia')->name('afg_guardia')->middleware('auth');
+

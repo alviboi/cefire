@@ -57,6 +57,7 @@
           </div>
         </div>
       </main>
+
       <!-- <sidebar>
         <div class="logo">logo</div>
         <div class="avatar">
@@ -97,7 +98,13 @@
         </nav>
         <div class="copyright">copyright &copy; 2018</div>
       </sidebar> -->
+      <div>
+
+      <button class="btn btn-primary" @click="agafa_datos_guardies">Este</button>
+
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -184,15 +191,38 @@ export default {
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+      this.agafa_datos_guardies();
     },
     onChange(event, mv, dia) {
         let dia_escollit = new Date(this.any, this.mes, dia);
+        var camp = "Txt"+mv+dia_escollit.getDayName();
+        var setmana = dia_escollit.getWeek();
+        var Nid_Asesor = event.target.value;
+        var params = {
+            camp: camp,
+            Assessor: Nid_Asesor,
+            setmana: setmana,
+            anyo: this.any
+        };
+        axios.post("./afg_guardia",params)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.error(err);
+        })
 
             console.log(event.target.value + " " + event.target.id + " " + mv + " " + dia_escollit.getWeek() + " " + dia_escollit.getDayName())
         },
-    posa_guardia(a, b, id) {
+    posa_guardia(a, b, id, MatVes) {
       //alert(id);
-      $("#ss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
+      //FAlta posar M o V davant, caldrá vore el contain
+      if (MaVes=="M"){
+      $("#Mss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
+      } else {
+                $("#Vss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
+
+      }
       //$("#ss" + a + "d" + b).value(id);
       //$('option:selected', '"#ss" + a + "d" + b').removeAttr('selected');
     //Using the value
@@ -242,28 +272,59 @@ export default {
           });
 
         //console.log(this.guardies);
-        this.guardies.forEach(element => {
-          this.arr = Object.values(element);
-            console.log(this.arr);
-          for (let index = 0; index < 14; index++) {
-            if (
-              this.arr[index].includes("guardia") ||
-              this.arr[index].includes("guàrdia") ||
-              this.arr[index].includes("GUARDIA") ||
-              this.arr[index].includes("Guardia") ||
-              this.arr[index].includes("Guàrdia") ||
-              this.arr[index].includes("gua")
-            ) {
-              //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
-              this.posa_guardia(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
-                this.arr[15]
-              );
+                    //console.log(this.guardies);
+        for (var index = 0; index < this.guardies.length; index++) {
+            for (const [key, value] of Object.entries(this.guardies[index])) {
+                if (key.includes('Manyana')){
+                    this.posa_guardia(
+                    set+1,
+                    Math.floor(index / 2 + 1) +
+                    (7 * (set) - this.primer_dia + 1),
+                    this.guardies[index][15],
+                    'M'
+                    );
+                } else {
+                    this.posa_guardia(
+                    set+1,
+                    Math.floor(index / 2 + 1) +
+                    (7 * (set) - this.primer_dia + 1),
+                    this.guardies[index][15],
+                    'V'
+                    );
+
+                }
+
+                console.log(key, value);
             }
-          }
-        });
+
+        }
+
+
+
+
+        // this.guardies.forEach(element => {
+        //   this.arr = Object.values(element);
+
+        //   for (let index = 0; index < 14; index++) {
+
+        //     // if (
+        //     //   this.arr[index].includes("guardia") ||
+        //     //   this.arr[index].includes("guàrdia") ||
+        //     //   this.arr[index].includes("GUARDIA") ||
+        //     //   this.arr[index].includes("Guardia") ||
+        //     //   this.arr[index].includes("Guàrdia") ||
+        //     //   this.arr[index].includes("gua")
+        //     // ) {
+        //     //   //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+        //     //   this.posa_guardia(
+        //     //     set+1,
+        //     //     Math.floor(index / 2 + 1) +
+        //     //       (7 * (set) - this.primer_dia + 1),
+        //     //     this.arr[15]
+        //     //   );
+        //     // }
+        //   }
+        // });
       }
     }
   },
@@ -297,6 +358,7 @@ export default {
     this.agafa_dia();
 
       this.agafa_datos_assesors();
+      this.agafa_datos_guardies();
   },
 };
 </script>

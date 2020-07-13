@@ -1924,10 +1924,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2102,14 +2121,34 @@ var month = now.getMonthName();
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+      this.agafa_datos_guardies();
     },
     onChange: function onChange(event, mv, dia) {
       var dia_escollit = new Date(this.any, this.mes, dia);
+      var camp = "Txt" + mv + dia_escollit.getDayName();
+      var setmana = dia_escollit.getWeek();
+      var Nid_Asesor = event.target.value;
+      var params = {
+        camp: camp,
+        Assessor: Nid_Asesor,
+        setmana: setmana,
+        anyo: this.any
+      };
+      axios.post("./afg_guardia", params).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.error(err);
+      });
       console.log(event.target.value + " " + event.target.id + " " + mv + " " + dia_escollit.getWeek() + " " + dia_escollit.getDayName());
     },
-    posa_guardia: function posa_guardia(a, b, id) {
+    posa_guardia: function posa_guardia(a, b, id, MatVes) {
       //alert(id);
-      $("#ss" + a + "d" + b).find('option[value="' + id + '"]').attr("selected", true); //$("#ss" + a + "d" + b).value(id);
+      //FAlta posar M o V davant, caldrá vore el contain
+      if (MaVes == "M") {
+        $("#Mss" + a + "d" + b).find('option[value="' + id + '"]').attr("selected", true);
+      } else {
+        $("#Vss" + a + "d" + b).find('option[value="' + id + '"]').attr("selected", true);
+      } //$("#ss" + a + "d" + b).value(id);
       //$('option:selected', '"#ss" + a + "d" + b').removeAttr('selected');
       //Using the value
       // $('"#ss" + a + "d" + b').find('option[value="'+id+'"]').attr("selected",true);
@@ -2122,6 +2161,7 @@ var month = now.getMonthName();
       // posa_curs(a, b, nombre) {
       //   var str = "<div style='font-size:10px;' class='concepte curs'>" + nombre + "</div>";
       //   $("#s" + a + "d" + b +' .curs2').append(str);
+
     },
     agafa_datos_assesors: function agafa_datos_assesors() {
       var _this = this;
@@ -2153,63 +2193,73 @@ var month = now.getMonthName();
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _loop, set;
+        var set, index, _i, _Object$entries, _Object$entries$_i, key, value;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _loop = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _loop(set) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _loop$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          _context2.next = 2;
-                          return axios.get("/guardias/" + (_this2.avui.getWeek() + set - 1) + "/" + _this2.avui.getFullYear()).then(function (response) {
-                            return _this2.guardies = response.data;
-                          })["catch"](function (error) {
-                            console.log(error);
-                          });
-
-                        case 2:
-                          //console.log(this.guardies);
-                          _this2.guardies.forEach(function (element) {
-                            _this2.arr = Object.values(element);
-                            console.log(_this2.arr);
-
-                            for (var index = 0; index < 14; index++) {
-                              if (_this2.arr[index].includes("guardia") || _this2.arr[index].includes("guàrdia") || _this2.arr[index].includes("GUARDIA") || _this2.arr[index].includes("Guardia") || _this2.arr[index].includes("Guàrdia") || _this2.arr[index].includes("gua")) {
-                                //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
-                                _this2.posa_guardia(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.arr[15]);
-                              }
-                            }
-                          });
-
-                        case 3:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _loop);
-                });
                 set = 0;
 
-              case 2:
+              case 1:
                 if (!(set < _this2.setmanes + 1)) {
-                  _context3.next = 7;
+                  _context2.next = 8;
                   break;
                 }
 
-                return _context3.delegateYield(_loop(set), "t0", 4);
+                _context2.next = 4;
+                return axios.get("/guardias/" + (_this2.avui.getWeek() + set - 1) + "/" + _this2.avui.getFullYear()).then(function (response) {
+                  return _this2.guardies = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
+                });
 
               case 4:
+                //console.log(this.guardies);
+                //console.log(this.guardies);
+                for (index = 0; index < _this2.guardies.length; index++) {
+                  for (_i = 0, _Object$entries = Object.entries(_this2.guardies[index]); _i < _Object$entries.length; _i++) {
+                    _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+
+                    if (key.includes('Manyana')) {
+                      _this2.posa_guardia(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.guardies[index][15], 'M');
+                    } else {
+                      _this2.posa_guardia(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.guardies[index][15], 'V');
+                    }
+
+                    console.log(key, value);
+                  }
+                } // this.guardies.forEach(element => {
+                //   this.arr = Object.values(element);
+                //   for (let index = 0; index < 14; index++) {
+                //     // if (
+                //     //   this.arr[index].includes("guardia") ||
+                //     //   this.arr[index].includes("guàrdia") ||
+                //     //   this.arr[index].includes("GUARDIA") ||
+                //     //   this.arr[index].includes("Guardia") ||
+                //     //   this.arr[index].includes("Guàrdia") ||
+                //     //   this.arr[index].includes("gua")
+                //     // ) {
+                //     //   //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+                //     //   this.posa_guardia(
+                //     //     set+1,
+                //     //     Math.floor(index / 2 + 1) +
+                //     //       (7 * (set) - this.primer_dia + 1),
+                //     //     this.arr[15]
+                //     //   );
+                //     // }
+                //   }
+                // });
+
+
+              case 5:
                 set++;
-                _context3.next = 2;
+                _context2.next = 1;
                 break;
 
-              case 7:
+              case 8:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
         }, _callee2);
@@ -2242,6 +2292,7 @@ var month = now.getMonthName();
   mounted: function mounted() {
     this.agafa_dia();
     this.agafa_datos_assesors();
+    this.agafa_datos_guardies();
   }
 });
 
@@ -2650,6 +2701,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     agafa_dia: function agafa_dia() {
       this.mes = this.avui.getMonth();
       this.any = this.avui.getFullYear();
+      this.primer_dia_2 = new Date(this.any, this.mes, 1);
       this.primer_dia = new Date(this.any, this.mes, 1).getDay();
       this.dies_mes = new Date(this.any, this.mes + 1, 1);
       this.dies_mes2 = new Date(this.dies_mes - 1);
@@ -2706,7 +2758,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       switch (_context.prev = _context.next) {
                         case 0:
                           _context.next = 2;
-                          return axios.get("/guardias/" + (_this.avui.getWeek() + set - 1) + "/" + _this.avui.getFullYear()).then(function (response) {
+                          return axios.get("/guardias/" + (_this.primer_dia_2.getWeek() + set) + "/" + _this.avui.getFullYear()).then(function (response) {
                             return _this.eixides = response.data;
                           })["catch"](function (error) {
                             console.log(error);
@@ -2771,7 +2823,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       switch (_context3.prev = _context3.next) {
                         case 0:
                           _context3.next = 2;
-                          return axios.get("/guardias/" + (_this2.avui.getWeek() + set - 1) + "/" + _this2.avui.getFullYear()).then(function (response) {
+                          return axios.get("/guardias/" + (_this2.primer_dia_2.getWeek() + set) + "/" + _this2.avui.getFullYear()).then(function (response) {
                             return _this2.eixides = response.data;
                           })["catch"](function (error) {
                             console.log(error);
@@ -2784,7 +2836,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                             for (var index = 0; index < 14; index++) {
                               if (_this2.arr[index].includes("curs") || _this2.arr[index].includes("CURS") || _this2.arr[index].includes("curs") || _this2.arr[index].includes("Ponen") || _this2.arr[index].includes("ponen") || _this2.arr[index].includes("PONEN")) {
-                                _this2.posa_curs(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.arr[14]);
+                                _this2.posa_curs(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.arr['Nid_Asesor']);
                               }
                             }
                           });
@@ -2836,14 +2888,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       switch (_context5.prev = _context5.next) {
                         case 0:
                           _context5.next = 2;
-                          return axios.get("/guardias/" + (_this3.avui.getWeek() + set - 1) + "/" + _this3.avui.getFullYear()).then(function (response) {
+                          return axios.get("/guardias/" + (_this3.primer_dia_2.getWeek() + set) + "/" + _this3.avui.getFullYear()).then(function (response) {
                             return _this3.guardies = response.data;
                           })["catch"](function (error) {
                             console.log(error);
                           });
 
                         case 2:
-                          //console.log(this.guardies);
+                          // console.log(this.guardies);
                           _this3.guardies.forEach(function (element) {
                             _this3.arr = Object.values(element);
                             console.log(_this3.arr);
@@ -2857,7 +2909,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             }
                           });
 
-                        case 3:
+                          console.log(_this3.guardies);
+
+                        case 4:
                         case "end":
                           return _context5.stop();
                       }
@@ -40834,6 +40888,17 @@ var render = function() {
             })
           ],
           2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: { click: _vm.agafa_datos_guardies }
+          },
+          [_vm._v("Este")]
         )
       ])
     ])

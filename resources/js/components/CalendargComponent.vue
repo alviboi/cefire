@@ -137,6 +137,7 @@ export default {
     agafa_dia() {
       this.mes = this.avui.getMonth();
       this.any = this.avui.getFullYear();
+      this.primer_dia_2 = new Date(this.any, this.mes, 1);
       this.primer_dia = new Date(this.any, this.mes, 1).getDay();
       this.dies_mes = new Date(this.any, this.mes + 1, 1);
       this.dies_mes2 = new Date(this.dies_mes - 1);
@@ -180,7 +181,7 @@ export default {
         await axios
           .get(
             "/guardias/" +
-              (this.avui.getWeek() + set - 1) +
+              (this.primer_dia_2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
@@ -218,7 +219,7 @@ export default {
         await axios
           .get(
             "/guardias/" +
-              (this.avui.getWeek() + set - 1) +
+              (this.primer_dia_2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
@@ -242,7 +243,7 @@ export default {
                 set+1,
                 Math.floor(index / 2 + 1) +
                   (7 * (set) - this.primer_dia + 1),
-                this.arr[14]
+                this.arr['Nid_Asesor']
               );
             }
           }
@@ -256,7 +257,7 @@ export default {
         await axios
           .get(
             "/guardias/" +
-              (this.avui.getWeek() + set - 1) +
+              (this.primer_dia_2.getWeek() + (set)) +
               "/" +
               this.avui.getFullYear()
           )
@@ -265,7 +266,7 @@ export default {
             console.log(error);
           });
 
-        //console.log(this.guardies);
+               // console.log(this.guardies);
         this.guardies.forEach(element => {
           this.arr = Object.values(element);
             console.log(this.arr);
@@ -288,7 +289,8 @@ export default {
             }
             //this.posa_guardia(1,1,'aaa');
           }
-        });
+        });console.log(this.guardies);
+
       }
     }
   },

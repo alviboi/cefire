@@ -163,6 +163,50 @@ class HorarioController extends Controller
        }
     }
 
+
+
+
+    public function afg_guardia(Request $request){
+        $horario=Horario::where('NidAsesor', $request->Assessor)->where('NidSemana',$request->setmana)->where('NidAnyo', $request->anyo)->first();
+        //var_dump($horario);
+        if ($horario) {
+        }else{
+            $horario=new Horario();
+            $horario->NidAsesor=$request->Assessor;
+            $horario->NidSemana=$request->setmana;
+            $horario->NidAnyo=$request->anyo;
+        }
+        // foreach ($horario as $key => $value) {
+        //     echo $key;
+        //     echo "<br>";
+        //     echo $value;
+        //     echo "<br>";
+        //     if($key==$request->camp){
+        //         $horario->$key=$value." GUARDIA";
+        //     }
+        // }
+        // var_dump($horario);
+        $val = $horario->{$request->camp};
+        //echo $val;
+        $horario->{$request->camp}="GUARDIA ".$val;
+
+        $horario->save();
+        // return back()->with('mensaje', 'Guardia guardada!');
+
+
+
+
+
+        //return view('notas.detalle', compact('nota'));
+    }
+
+
+
+
+
+
+
+
     public function get_hora_anyo(Request $request,$semana2,$anyo2){
         $horario=Horario::where('NidAsesor', auth()->user()->Nid_Asesor)->where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
 
@@ -228,6 +272,10 @@ class HorarioController extends Controller
         //return view('notas.detalle', compact('nota'));
     }
 
+
+
+
+
     public function get_todas_guardias(Request $request,$semana2,$anyo2){
         //$horario = Horario::where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
 
@@ -246,15 +294,84 @@ class HorarioController extends Controller
         'TxtTardeS',
         'TxtManyanaD',
         'TxtTardeD',
-        'StrNombre',
-        'asesores.NidAsesor');
+        'name',
+        'users.Nid_Asesor');
         //$a = Asesores::all();
-        $horario = Horario::where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->join('asesores', 'asesores.NidAsesor', '=', 'horarios.NidAsesor')->select($seleccio)->get();
+        $horario = Horario::where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->join('users', 'users.Nid_Asesor', '=', 'horarios.NidAsesor')->select($seleccio)->get();
         // $nota = App\Nota::find($id);
         //Aquí valida si existe sino redirije al 404
         //$nota = App\Nota::findOrFail($id);
         //$horario=Horario::where('NidAsesor', $nidasesor2)->where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
-        return $horario;
+
+
+        $horario_arr=$horario->toArray();
+        //var_dump($horario_arr[0]);
+        //var_dump($horario_arr);
+        for ($i=0; $i < sizeof($horario_arr); $i++) {
+            # code...
+            foreach ($horario_arr[$i] as $key => $value) {
+                # code...
+                if ($value === null){
+                    $horario_arr[$i][$key]="";
+                }
+            }
+
+        }
+
+
+        // if (!$horario->isEmpty()){
+        //     return response()->json([
+        //         [
+        //         'TxtManyanaL' => $this->convertir($horario[0]->TxtManyanaL),
+        //         'TxtTardeL' => $this->convertir($horario[0]->TxtTardeL),
+        //         'TxtManyanaM' => $this->convertir($horario[0]->TxtManyanaM),
+        //         'TxtTardeM' => $this->convertir($horario[0]->TxtTardeM),
+        //         'TxtManyanaX' => $this->convertir($horario[0]->TxtManyanaX),
+        //         'TxtTardeX' => $this->convertir($horario[0]->TxtTardeX),
+        //         'TxtManyanaJ' => $this->convertir($horario[0]->TxtManyanaJ),
+        //         'TxtTardeJ' => $this->convertir($horario[0]->TxtTardeJ),
+        //         'TxtManyanaV' => $this->convertir($horario[0]->TxtManyanaV),
+        //         'TxtTardeV' => $this->convertir($horario[0]->TxtTardeV),
+        //         'TxtManyanaS' => $this->convertir($horario[0]->TxtManyanaS),
+        //         'TxtTardeS' => $this->convertir($horario[0]->TxtTardeS),
+        //         'TxtManyanaD' => $this->convertir($horario[0]->TxtManyanaD),
+        //         'TxtTardeD' => $this->convertir($horario[0]->TxtTardeD),
+        //         'NidAnyo' => $this->convertir($horario[0]->NidAnyo),
+        //         'NidSemana' => $this->convertir($horario[0]->NidSemana),
+        //         'TxtObservaciones' => $this->convertir($horario[0]->TxtObservaciones)]
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         [
+        //         'TxtManyanaL' => '',
+        //         'TxtTardeL' => '',
+        //         'TxtManyanaM' => '',
+        //         'TxtTardeM' => '',
+        //         'TxtManyanaX' => '',
+        //         'TxtTardeX' => '',
+        //         'TxtManyanaJ' => '',
+        //         'TxtTardeJ' => '',
+        //         'TxtManyanaV' => '',
+        //         'TxtTardeV' => '',
+        //         'TxtManyanaS' => '',
+        //         'TxtTardeS' => '',
+        //         'TxtManyanaD' => '',
+        //         'TxtTardeD' => '',
+        //         'NidAnyo' => 0,
+        //         'NidSemana' => 0,
+        //         'TxtObservaciones' => '']
+        //     ]);
+        // }
+
+
+
+
+
+
+
+
+
+        return $horario_arr;
 
         // if($request->ajax()){
         //     return $horario;
