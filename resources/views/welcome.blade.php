@@ -4,10 +4,10 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">CEFIRE VALENCIA</h1>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p class="lead">Aquesta pàgina és per a gestioanr els horaris del centre del CEFIRE de València</p>
         <hr class="my-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <p>Pots accedir clickant al següent botó. O desde el menú Acceder.</p>
+        <a class="btn btn-primary btn-lg" href="{{ route('login') }}" role="button">Accedeix</a>
     </div>
 </div>
 {{$exemple ?? ''}}

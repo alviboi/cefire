@@ -3039,15 +3039,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       //alert(index);
-      axios.post("./borra_perfil", {
-        id: id
-      }).then(function (res) {
-        console.log(res);
+      var conf = confirm("Segur que vols esborrar?");
 
-        _this2.assesors.splice(index, 1);
-      })["catch"](function (err) {
-        console.error(err);
-      });
+      if (conf) {
+        axios.post("./borra_perfil", {
+          id: id
+        }).then(function (res) {
+          console.log(res);
+
+          _this2.assesors.splice(index, 1);
+        })["catch"](function (err) {
+          console.error(err);
+        });
+      } else {
+        alert("Tranquilitat, no he esborrat a ningú!");
+      }
     }
   },
   mounted: function mounted() {

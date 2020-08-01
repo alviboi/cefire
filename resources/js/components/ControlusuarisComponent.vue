@@ -60,17 +60,23 @@ export default {
     },
     borrar(index,id){
         //alert(index);
-        axios.post("./borra_perfil", {
+        var conf = confirm("Segur que vols esborrar?");
+        if (conf) {
+                    axios.post("./borra_perfil", {
             id: id,
+            }
+            )
+            .then(res => {
+            console.log(res);
+            this.assesors.splice(index, 1);
+            })
+            .catch(err => {
+            console.error(err);
+            });
+        } else {
+            alert ("Tranquilitat, no he esborrat a ningú!");
         }
-        )
-        .then(res => {
-          console.log(res);
-          this.assesors.splice(index, 1);
-        })
-        .catch(err => {
-          console.error(err);
-        });
+
     }
   },
   mounted() {
