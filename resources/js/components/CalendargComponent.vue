@@ -161,7 +161,7 @@ export default {
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
-    },
+    },ºº
     posa_guardia(a, b, nombre) {
       var str = "<div style='font-size:10px;' class='concepte guardia'>" + nombre + "</div>";
       $("#s" + a + "d" + b +' .guardia2').append(str);

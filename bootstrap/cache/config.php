@@ -343,7 +343,7 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/storage/app',
+        'root' => '/var/www/storage/app/files/uploads',
       ),
       'public' => 
       array (
@@ -467,11 +467,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'smtp.mailtrap.io',
-        'port' => '2525',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'valenciacefire',
+        'password' => 'iktqdmwtguhecetr',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -504,7 +504,7 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'valenciacefire@gmail.com',
       'name' => 'CEFIRE HORARI',
     ),
     'markdown' => 

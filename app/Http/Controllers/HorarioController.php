@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Horario;
 use App\Asesores;
+use App\Mail\EnviarGuardia;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HorarioController extends Controller
 {
@@ -195,6 +198,14 @@ class HorarioController extends Controller
 
 
 
+        $usuario=User::where('Nid_Asesor', $request->Assessor)->first();
+        //var_dump($usuario->email);
+        $datos = [
+            'fecha' => "prova",
+            'nombre' => $usuario->name,
+        ];
+        Mail::to($usuario->email)->send(new EnviarGuardia($datos));
+
 
 
         //return view('notas.detalle', compact('nota'));
@@ -296,26 +307,17 @@ class HorarioController extends Controller
         'TxtTardeD',
         'name',
         'users.Nid_Asesor');
-        //$a = Asesores::all();
+
         $horario = Horario::where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->join('users', 'users.Nid_Asesor', '=', 'horarios.NidAsesor')->select($seleccio)->get();
-        // $nota = App\Nota::find($id);
-        //Aquí valida si existe sino redirije al 404
-        //$nota = App\Nota::findOrFail($id);
-        //$horario=Horario::where('NidAsesor', $nidasesor2)->where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
 
 
         $horario_arr=$horario->toArray();
-        //var_dump($horario_arr[0]);
-        //var_dump($horario_arr);
         for ($i=0; $i < sizeof($horario_arr); $i++) {
-            # code...
             foreach ($horario_arr[$i] as $key => $value) {
-                # code...
                 if ($value === null){
                     $horario_arr[$i][$key]="";
                 }
             }
-
         }
 
 
