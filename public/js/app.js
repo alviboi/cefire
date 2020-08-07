@@ -2124,6 +2124,7 @@ var month = now.getMonthName();
       this.agafa_datos_guardies();
     },
     onChange: function onChange(event, mv, dia) {
+      console.log(event);
       var dia_escollit = new Date(this.any, this.mes, dia);
       var camp = "Txt" + mv + dia_escollit.getDayName();
       var setmana = dia_escollit.getWeek();
@@ -2144,7 +2145,7 @@ var month = now.getMonthName();
     posa_guardia: function posa_guardia(a, b, id, MatVes) {
       //alert(id);
       //FAlta posar M o V davant, caldrá vore el contain
-      if (MaVes == "M") {
+      if (MatVes == "M") {
         $("#Mss" + a + "d" + b).find('option[value="' + id + '"]').attr("selected", true);
       } else {
         $("#Vss" + a + "d" + b).find('option[value="' + id + '"]').attr("selected", true);
@@ -2193,7 +2194,7 @@ var month = now.getMonthName();
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var set, index, _i, _Object$entries, _Object$entries$_i, key, value;
+        var set, index, a, _i, _Object$entries, _Object$entries$_i, key, value;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2203,7 +2204,7 @@ var month = now.getMonthName();
 
               case 1:
                 if (!(set < _this2.setmanes + 1)) {
-                  _context2.next = 8;
+                  _context2.next = 39;
                   break;
                 }
 
@@ -2215,49 +2216,96 @@ var month = now.getMonthName();
                 });
 
               case 4:
-                //console.log(this.guardies);
-                //console.log(this.guardies);
-                for (index = 0; index < _this2.guardies.length; index++) {
-                  for (_i = 0, _Object$entries = Object.entries(_this2.guardies[index]); _i < _Object$entries.length; _i++) {
-                    _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+                console.log(_this2.guardies); //console.log(this.guardies);
 
-                    if (key.includes('Manyana')) {
-                      _this2.posa_guardia(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.guardies[index][15], 'M');
-                    } else {
-                      _this2.posa_guardia(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this2.primer_dia + 1), _this2.guardies[index][15], 'V');
-                    }
+                index = 0;
 
-                    console.log(key, value);
+              case 6:
+                if (!(index < _this2.guardies.length)) {
+                  _context2.next = 36;
+                  break;
+                }
+
+                a = 0;
+                _i = 0, _Object$entries = Object.entries(_this2.guardies[index]);
+
+              case 9:
+                if (!(_i < _Object$entries.length)) {
+                  _context2.next = 33;
+                  break;
+                }
+
+                _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+                _context2.t0 = key.substr(-1);
+                _context2.next = _context2.t0 === 'L' ? 14 : _context2.t0 === 'M' ? 16 : _context2.t0 === 'X' ? 18 : _context2.t0 === 'J' ? 20 : _context2.t0 === 'V' ? 22 : _context2.t0 === 'S' ? 24 : _context2.t0 === 'D' ? 26 : 28;
+                break;
+
+              case 14:
+                a = 1;
+                return _context2.abrupt("break", 29);
+
+              case 16:
+                a = 2;
+                return _context2.abrupt("break", 29);
+
+              case 18:
+                a = 3;
+                return _context2.abrupt("break", 29);
+
+              case 20:
+                a = 4;
+                return _context2.abrupt("break", 29);
+
+              case 22:
+                a = 5;
+                return _context2.abrupt("break", 29);
+
+              case 24:
+                a = 6;
+                return _context2.abrupt("break", 29);
+
+              case 26:
+                a = 7;
+                return _context2.abrupt("break", 29);
+
+              case 28:
+                return _context2.abrupt("break", 29);
+
+              case 29:
+                if (typeof value === 'string' && value.includes("GUARDIA")) {
+                  if (typeof key === 'string' && key.includes('Manyana')) {
+                    _this2.posa_guardia(set + 1, a + (7 * set - _this2.primer_dia + 1), _this2.guardies[index]['Nid_Asesor'], 'M');
+
+                    console.log(_this2.guardies[index]);
+                    console.log("#################################################################" + a + " setmana " + set + "    " + _this2.primer_dia);
+                    console.log(set + 1 + " " + (Math.floor(a / 2 + 1) + (7 * set - _this2.primer_dia)) + " MATI " + _this2.guardies[index]['Nid_Asesor']);
+                  } else if (typeof key === 'string' && key.includes('Tarde')) {
+                    _this2.posa_guardia(set + 1, a + (7 * set - _this2.primer_dia + 1), _this2.guardies[index]['Nid_Asesor'], 'V');
+
+                    console.log("#################################################################");
+                    console.log(set + 1 + " " + (Math.floor(a / 2 + 1) + (7 * set - _this2.primer_dia)) + " VESPRADA " + _this2.guardies[index]['Nid_Asesor']);
                   }
-                } // this.guardies.forEach(element => {
-                //   this.arr = Object.values(element);
-                //   for (let index = 0; index < 14; index++) {
-                //     // if (
-                //     //   this.arr[index].includes("guardia") ||
-                //     //   this.arr[index].includes("guàrdia") ||
-                //     //   this.arr[index].includes("GUARDIA") ||
-                //     //   this.arr[index].includes("Guardia") ||
-                //     //   this.arr[index].includes("Guàrdia") ||
-                //     //   this.arr[index].includes("gua")
-                //     // ) {
-                //     //   //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
-                //     //   this.posa_guardia(
-                //     //     set+1,
-                //     //     Math.floor(index / 2 + 1) +
-                //     //       (7 * (set) - this.primer_dia + 1),
-                //     //     this.arr[15]
-                //     //   );
-                //     // }
-                //   }
-                // });
+                } // console.log("#################################################################");
+                // console.log((set+1)+" "+(Math.floor(index / 2 + 1) + (7 * (set) - this.primer_dia + 1)) + "aSSESSOR "+this.guardies[index]['Nid_Asesor']);
+                //console.log(key, value);
 
 
-              case 5:
+              case 30:
+                _i++;
+                _context2.next = 9;
+                break;
+
+              case 33:
+                index++;
+                _context2.next = 6;
+                break;
+
+              case 36:
                 set++;
                 _context2.next = 1;
                 break;
 
-              case 8:
+              case 39:
               case "end":
                 return _context2.stop();
             }
@@ -40902,7 +40950,11 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-primary",
-            on: { click: _vm.agafa_datos_guardies }
+            on: {
+              click: function($event) {
+                return _vm.posa_guardia(6, 31, 47, "M")
+              }
+            }
           },
           [_vm._v("Este")]
         )

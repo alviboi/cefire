@@ -100,7 +100,7 @@
       </sidebar> -->
       <div>
 
-      <button class="btn btn-primary" @click="agafa_datos_guardies">Este</button>
+      <button class="btn btn-primary" @click="posa_guardia(6, 31, 47, 'M');">Este</button>
 
       </div>
     </div>
@@ -129,6 +129,7 @@ var month = now.getMonthName();
 export default {
   data() {
     return {
+
         select1: "",
         select2: "",
       assesors: [],
@@ -194,6 +195,7 @@ export default {
       this.agafa_datos_guardies();
     },
     onChange(event, mv, dia) {
+        console.log(event);
         let dia_escollit = new Date(this.any, this.mes, dia);
         var camp = "Txt"+mv+dia_escollit.getDayName();
         var setmana = dia_escollit.getWeek();
@@ -217,11 +219,10 @@ export default {
     posa_guardia(a, b, id, MatVes) {
       //alert(id);
       //FAlta posar M o V davant, caldrá vore el contain
-      if (MaVes=="M"){
+      if (MatVes=="M"){
       $("#Mss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
       } else {
-                $("#Vss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
-
+            $("#Vss" + a + "d" + b).find('option[value="'+id+'"]').attr("selected",true);
       }
       //$("#ss" + a + "d" + b).value(id);
       //$('option:selected', '"#ss" + a + "d" + b').removeAttr('selected');
@@ -271,30 +272,67 @@ export default {
             console.log(error);
           });
 
-        //console.log(this.guardies);
+        console.log(this.guardies);
                     //console.log(this.guardies);
         for (var index = 0; index < this.guardies.length; index++) {
+            var a=0;
             for (const [key, value] of Object.entries(this.guardies[index])) {
-                if (key.includes('Manyana')){
-                    this.posa_guardia(
-                    set+1,
-                    Math.floor(index / 2 + 1) +
-                    (7 * (set) - this.primer_dia + 1),
-                    this.guardies[index][15],
-                    'M'
-                    );
-                } else {
-                    this.posa_guardia(
-                    set+1,
-                    Math.floor(index / 2 + 1) +
-                    (7 * (set) - this.primer_dia + 1),
-                    this.guardies[index][15],
-                    'V'
-                    );
-
+                switch (key.substr(-1)) {
+                    case 'L':
+                        a=1;
+                        break;
+                    case 'M':
+                        a=2;
+                        break;
+                    case 'X':
+                        a=3;
+                        break;
+                    case 'J':
+                        a=4;
+                        break;
+                    case 'V':
+                        a=5;
+                        break;
+                    case 'S':
+                        a=6;
+                        break;
+                    case 'D':
+                        a=7;
+                        break;
+                    default:
+                        break;
                 }
+                if (typeof value === 'string' && value.includes("GUARDIA")){
+                    if (typeof key === 'string' && key.includes('Manyana')){
+                        this.posa_guardia(
+                        set+1,
+                        a +
+                        (7 * (set) - this.primer_dia + 1),
+                        this.guardies[index]['Nid_Asesor'],
+                        'M'
+                        );
+                        console.log(this.guardies[index]);
+                        console.log("#################################################################"+a+" setmana "+set+"    "+this.primer_dia);
+                        console.log((set+1)+" "+ (Math.floor(a / 2 + 1) + (7 * (set) - this.primer_dia))  + " MATI "+this.guardies[index]['Nid_Asesor']);
 
-                console.log(key, value);
+                    } else if (typeof key === 'string' && key.includes('Tarde')){
+                        this.posa_guardia(
+                        set+1,
+                        a +
+                        (7 * (set) - this.primer_dia + 1),
+                        this.guardies[index]['Nid_Asesor'],
+                        'V'
+                        );
+                        console.log("#################################################################");
+                        console.log((set+1)+" "+(Math.floor(a / 2 + 1) + (7 * (set) - this.primer_dia)) + " VESPRADA "+this.guardies[index]['Nid_Asesor']);
+
+
+                    }
+                }
+                // console.log("#################################################################");
+                // console.log((set+1)+" "+(Math.floor(index / 2 + 1) + (7 * (set) - this.primer_dia + 1)) + "aSSESSOR "+this.guardies[index]['Nid_Asesor']);
+
+                //console.log(key, value);
             }
 
         }
