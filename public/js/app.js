@@ -3176,7 +3176,7 @@ $(function () {
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      prova: 'No canviat',
+      prova: '',
       centre_in: '',
       fecha_in: '',
       file: null,
@@ -3187,6 +3187,9 @@ $(function () {
   },
   props: ['prova2', 'setmana', 'any', 'dia'],
   methods: {
+    edita_a_ma: function edita_a_ma() {
+      this.$emit('update:prova2', this.prova2);
+    },
     cefire: function cefire(sel) {
       if (this.prova2 === undefined) {
         this.prova2 = '';
@@ -3196,9 +3199,8 @@ $(function () {
         this.prova2 = sel;
       } else {
         this.prova2 = this.prova2 + ' ' + sel;
-      }
+      } //this.$emit('update:prova2',this.prova2);
 
-      this.$emit('update:prova2', this.prova2);
     },
     chooseFiles: function chooseFiles() {
       document.getElementById(this._uid).click();
@@ -3309,7 +3311,10 @@ $(function () {
     $("#costat").hide();
     this.fileUpload = this._uid;
   },
-  watch: {// prova2(newValue, oldValue) {
+  watch: {
+    prova2: function prova2(newValue, oldValue) {
+      this.$emit('update:prova2', this.prova2);
+    } // prova2(newValue, oldValue) {
     //     if (newValue.includes('PERMÍS(')) {
     //         let file = mySubString = str.substring(str.lastIndexOf("PERMÍS(") + 1,str.lastIndexOf(")"));
     //         let link="./uploads/"+file;
@@ -3317,6 +3322,7 @@ $(function () {
     //         $("#costat a").attr("href", "./uploads/"+this.link_dia);
     //     }
     // }
+
   }
 });
 
@@ -41911,10 +41917,10 @@ var render = function() {
     _c("div", { staticClass: "wrapper" }, [
       _c("textarea", {
         attrs: { name: "este", id: "area_dia", cols: "30", rows: "2" },
-        domProps: { value: _vm.prova2 },
+        domProps: { value: this.prova2 },
         on: {
-          keyup: function($event) {
-            return _vm.$emit("update:prova2", _vm.prova2)
+          input: function($event) {
+            return _vm.$emit("update:prova2", $event.target.value)
           }
         }
       }),

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="wrapper">
-                    <textarea name="este" id="area_dia" cols="30" rows="2" :value="prova2" @keyup="$emit('update:prova2',prova2);"></textarea>
+                    <textarea name="este" id="area_dia" cols="30" rows="2" :value="this.prova2" @input="$emit('update:prova2', $event.target.value)"></textarea>
             <div class="controls">
 
                 <button data-toggle="tooltip" data-placement="bottom" title="CEFIRE" @click="cefire('CEFIRE')" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></button>
@@ -47,7 +47,7 @@
     export default {
         data() {
             return {
-                prova: 'No canviat',
+                prova: '',
                 centre_in: '',
                 fecha_in: '',
                 file: null,
@@ -58,6 +58,9 @@
         },
         props: ['prova2','setmana','any','dia'],
         methods: {
+            edita_a_ma () {
+                this.$emit('update:prova2', this.prova2);
+            },
             cefire(sel) {
                 if (this.prova2===undefined){
                     this.prova2='';
@@ -68,7 +71,7 @@
                     this.prova2=this.prova2+' '+sel;
                 }
 
-                this.$emit('update:prova2',this.prova2);
+                //this.$emit('update:prova2',this.prova2);
             },
             chooseFiles() {
                 document.getElementById(this._uid).click()
@@ -161,6 +164,9 @@
             this.fileUpload = this._uid
         },
         watch: {
+            prova2(newValue ,oldValue){
+                this.$emit('update:prova2', this.prova2);
+            }
             // prova2(newValue, oldValue) {
             //     if (newValue.includes('PERMÍS(')) {
             //         let file = mySubString = str.substring(str.lastIndexOf("PERMÍS(") + 1,str.lastIndexOf(")"));
