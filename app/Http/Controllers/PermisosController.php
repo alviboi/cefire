@@ -24,6 +24,18 @@ class PermisosController extends Controller
         return Permisos::where('Nid_Asesor', auth()->user()->Nid_Asesor)->get();
     }
 
+    public function torna_tots()
+    {
+        //
+        return Permisos::get();
+    }
+
+    public function torna_concret(Request $request)
+    {
+        //
+        return Permisos::where('Nid_Asesor', $request->id)->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

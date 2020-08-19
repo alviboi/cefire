@@ -5,6 +5,7 @@
         <div class="col-lg-3 col-md-3">
             <datepicker :language="es" :monday-first="true" :inline="true" v-model="fecha"></datepicker>
              {{fechas}}
+             <estadisticas-component></estadisticas-component>
         </div>
         <div class="col-lg-9 col-md-9">
                     <div class="row">

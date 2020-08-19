@@ -40,7 +40,7 @@
                             <a class="nav-link" href="{{ route('horariofechaid',['semana' => 41,'anyo' => 2019]) }}">Horario</a>
                         </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Horario</a>
+                            <a class="nav-link" href="{{ route('home') }}">El teu horari</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./calendari">Guardies</a>

@@ -25,6 +25,10 @@ Route::get('/permisos_demanats', function () {
     return view('permisos_demanats');
 });
 
+Route::get('/permisos_usuaris', function () {
+    return view('permisos_demanats_tots');
+});
+
 Route::get('/control_usuaris', function () {
     return view('controlusuaris');
 })->middleware('auth');
@@ -53,6 +57,8 @@ Route::post('arxiu_permis/','HorarioController@guardar_arxiu')->name('guardar_ar
 
 Route::resource('permisos', 'PermisosController');
 
+Route::get('permisos_tots', 'PermisosController@torna_tots');
+
 Route::post('permisos_borrar', 'PermisosController@destroy');
 
 Route::post('actualitza_perfil/','UserController@actualitza_perfil')->name('actualitza_perfil')->middleware('auth');
@@ -60,4 +66,9 @@ Route::post('actualitza_perfil/','UserController@actualitza_perfil')->name('actu
 Route::post('borra_perfil/','UserController@borra_perfil')->name('borra_perfil')->middleware('auth');
 
 Route::post('afg_guardia/','HorarioController@afg_guardia')->name('afg_guardia')->middleware('auth');
+
+Route::get('permisos_tots_concret/{id}/','PermisosController@torna_concret');
+
+Route::get('estadistica/{any}/{setmana}/','EstadisticasController@estadisticas');
+
 
