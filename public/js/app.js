@@ -2602,6 +2602,12 @@ __webpack_require__.r(__webpack_exports__);
       this.fechas['NidSemana'] = this.sem;
       this.fechas['NidAnyo'] = this.any;
       this.leer_datos(this.any, this.sem);
+    },
+    fechas: {
+      handler: function handler() {
+        this.escribir_datos();
+      },
+      deep: true
     }
   }
 });
@@ -2724,6 +2730,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2735,6 +2744,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       check_eixida: false,
       check_guardia: false,
       check_curs: false,
+      check_compensa: false,
       dia: null,
       mes: null,
       any: null,
@@ -2774,9 +2784,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.check_eixida = false;
       this.check_curs = false;
       this.check_guardia = false;
+      this.check_compensa = false;
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+    },
+    posa_compensa: function posa_compensa(a, b, nombre) {
+      var str = "<div style='font-size:10px;' class='concepte compensa'>" + nombre + "</div>";
+      $("#s" + a + "d" + b + ' .compensa2').append(str);
     },
     posa_guardia: function posa_guardia(a, b, nombre) {
       var str = "<div style='font-size:10px;' class='concepte guardia'>" + nombre + "</div>";
@@ -2989,6 +3004,76 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       }))();
+    },
+    ///////////////guardies////////////////////////////77
+    agafa_datos_compensa: function agafa_datos_compensa() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _loop4, set;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _loop4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _loop4(set) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _loop4$(_context7) {
+                    while (1) {
+                      switch (_context7.prev = _context7.next) {
+                        case 0:
+                          _context7.next = 2;
+                          return axios.get("/guardias/" + (_this4.primer_dia_2.getWeek() + set) + "/" + _this4.avui.getFullYear()).then(function (response) {
+                            return _this4.guardies = response.data;
+                          })["catch"](function (error) {
+                            console.log(error);
+                          });
+
+                        case 2:
+                          // console.log(this.guardies);
+                          _this4.guardies.forEach(function (element) {
+                            _this4.arr = Object.values(element);
+                            console.log(_this4.arr);
+
+                            for (var index = 0; index < 14; index++) {
+                              if (_this4.arr[index].includes("COMPENSA")) {
+                                //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+                                _this4.posa_compensa(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this4.primer_dia + 1), _this4.arr[14]);
+                              } //this.posa_guardia(1,1,'aaa');
+
+                            }
+                          });
+
+                          console.log(_this4.guardies);
+
+                        case 4:
+                        case "end":
+                          return _context7.stop();
+                      }
+                    }
+                  }, _loop4);
+                });
+                set = 0;
+
+              case 2:
+                if (!(set < _this4.setmanes + 1)) {
+                  _context8.next = 7;
+                  break;
+                }
+
+                return _context8.delegateYield(_loop4(set), "t0", 4);
+
+              case 4:
+                set++;
+                _context8.next = 2;
+                break;
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   },
   watch: {
@@ -3011,6 +3096,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.agafa_datos_curs();
       } else {
         $(".curs").remove();
+      }
+    },
+    check_compensa: function check_compensa(newValue, oldValue) {
+      if (this.check_compensa) {
+        this.agafa_datos_compensa();
+      } else {
+        $(".compensa").remove();
       }
     }
   },
@@ -3183,7 +3275,8 @@ $(function () {
       file: null,
       link_dia: null,
       titul: '',
-      fileUpload: null
+      fileUpload: null,
+      uuid: null
     };
   },
   props: ['prova2', 'setmana', 'any', 'dia'],
@@ -3209,8 +3302,8 @@ $(function () {
     borra: function borra() {
       this.prova2 = '';
       this.$emit('update:prova2', this.prova2);
-      document.getElementById('area_dia').value = '';
-      $("#area_dia").prop("disabled", false);
+      document.getElementById(this.uuid).value = '';
+      $(this.uuid).prop("disabled", false);
     },
     este: function este() {
       this.file = event.target.files || event.dataTransfer.files;
@@ -3324,6 +3417,9 @@ $(function () {
     //     }
     // }
 
+  },
+  beforeCreate: function beforeCreate() {
+    this.uuid = this._uid;
   }
 });
 
@@ -3338,6 +3434,14 @@ $(function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3347,7 +3451,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      estadistica_conta: {}
+    };
+  },
+  props: ['setmana', 'any'],
+  methods: {
+    estadistica: function estadistica() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var self, url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                self = _this;
+                url = './estadistica/' + self.any + '/' + self.setmana;
+                _context.next = 4;
+                return axios.get(url).then(function (res) {
+                  _this.estadistica_conta = res.data;
+                  console.log(_this.estadistica_conta);
+                })["catch"](function (err) {
+                  console.error(err);
+                });
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    actualitza: function actualitza() {
+      var _this2 = this;
+
+      setInterval(function () {
+        _this2.estadistica();
+      }, 2000);
+    }
+  },
+  mounted: function mounted() {
+    this.actualitza();
+  }
+});
 
 /***/ }),
 
@@ -8204,7 +8359,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".eixida[data-v-21dd05bf] {\n  border: solid 1px blue;\n}\n.guardia[data-v-21dd05bf] {\n  border: solid 1px red;\n}\n.curs[data-v-21dd05bf] {\n  border: solid 1px green;\n}\n.wrapper[data-v-21dd05bf] {\n  display: grid;\n  grid-template-rows: 70px 1fr 70px;\n  grid-template-columns: 1fr;\n  grid-template-areas: \"content\";\n  width: 100vw;\n  height: 100vh;\n}\n@media screen and (min-width: 850px) {\n.wrapper[data-v-21dd05bf] {\n    grid-template-columns: 5fr;\n    grid-template-rows: 1fr;\n    grid-template-areas: \"content\";\n}\n}\nmain[data-v-21dd05bf] {\n  grid-area: content;\n  padding: 80px;\n}\nsidebar[data-v-21dd05bf] {\n  grid-area: sidebar;\n  display: grid;\n  grid-template-columns: 1fr 3fr 1fr;\n  grid-template-rows: 3fr 1fr;\n  grid-template-areas: \"logo menu avatar\" \"copyright menu avatar\";\n}\n.logo[data-v-21dd05bf] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.copyright[data-v-21dd05bf] {\n  text-align: center;\n}\n.avatar[data-v-21dd05bf] {\n  grid-area: avatar;\n  display: flex;\n  align-items: center;\n  flex-direction: row-reverse;\n}\n.avatar__name[data-v-21dd05bf] {\n  flex: 1;\n  text-align: right;\n  margin-right: 1em;\n}\n.avatar__img > img[data-v-21dd05bf] {\n  display: block;\n}\n.copyright[data-v-21dd05bf] {\n  grid-area: copyright;\n}\n.menu[data-v-21dd05bf] {\n  grid-area: menu;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.logo[data-v-21dd05bf] {\n  grid-area: logo;\n}\n.menu__text[data-v-21dd05bf] {\n  display: none;\n}\n@media screen and (min-width: 850px) {\nsidebar[data-v-21dd05bf] {\n    grid-template-areas: \"logo\" \"avatar\" \"menu\" \"copyright\";\n    grid-template-columns: 1fr;\n    grid-template-rows: 50px auto 1fr 50px;\n}\n.menu[data-v-21dd05bf] {\n    flex-direction: column;\n    align-items: normal;\n    justify-content: flex-start;\n}\n.menu__text[data-v-21dd05bf] {\n    display: inline-block;\n}\n.avatar[data-v-21dd05bf] {\n    flex-direction: column;\n}\n.avatar__name[data-v-21dd05bf] {\n    margin: 1em 0;\n}\n.avatar__img > img[data-v-21dd05bf] {\n    border-radius: 50%;\n}\n}\n.toolbar[data-v-21dd05bf] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 24px;\n}\n.calendar__week[data-v-21dd05bf],\n.calendar__header[data-v-21dd05bf] {\n  display: grid;\n  grid-template-columns: repeat(7, 1fr);\n}\n.calendar__week[data-v-21dd05bf] {\n  grid-auto-rows: 170px;\n  text-align: right;\n}\n.calendar__header[data-v-21dd05bf] {\n  grid-auto-rows: 50px;\n  align-items: center;\n  text-align: center;\n}\n\n/* COSMETIC STYLING */\n.copyright[data-v-21dd05bf] {\n  font-size: 0.7rem;\n  font-weight: 400;\n}\n.calendar[data-v-21dd05bf] {\n  background-color: white;\n  border: 1px solid #e1e1e1;\n}\n.calendar__header > div[data-v-21dd05bf] {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  font-weight: bold;\n}\n.calendar__day[data-v-21dd05bf] {\n  border-right: 1px solid #e1e1e1;\n  border-top: 1px solid #e1e1e1;\n  height: 150px;\n}\n.calendar__day .guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.calendar__day .eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.calendar__day .curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}", ""]);
+exports.push([module.i, ".eixida[data-v-21dd05bf] {\n  border: solid 1px blue;\n}\n.guardia[data-v-21dd05bf] {\n  border: solid 1px red;\n}\n.curs[data-v-21dd05bf] {\n  border: solid 1px green;\n}\n.compensa[data-v-21dd05bf] {\n  border: solid 1px yellow;\n}\n.wrapper[data-v-21dd05bf] {\n  display: grid;\n  grid-template-rows: 70px 1fr 70px;\n  grid-template-columns: 1fr;\n  grid-template-areas: \"content\";\n  width: 100vw;\n  height: 100vh;\n}\n@media screen and (min-width: 850px) {\n.wrapper[data-v-21dd05bf] {\n    grid-template-columns: 5fr;\n    grid-template-rows: 1fr;\n    grid-template-areas: \"content\";\n}\n}\nmain[data-v-21dd05bf] {\n  grid-area: content;\n  padding: 80px;\n}\nsidebar[data-v-21dd05bf] {\n  grid-area: sidebar;\n  display: grid;\n  grid-template-columns: 1fr 3fr 1fr;\n  grid-template-rows: 3fr 1fr;\n  grid-template-areas: \"logo menu avatar\" \"copyright menu avatar\";\n}\n.logo[data-v-21dd05bf] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.copyright[data-v-21dd05bf] {\n  text-align: center;\n}\n.avatar[data-v-21dd05bf] {\n  grid-area: avatar;\n  display: flex;\n  align-items: center;\n  flex-direction: row-reverse;\n}\n.avatar__name[data-v-21dd05bf] {\n  flex: 1;\n  text-align: right;\n  margin-right: 1em;\n}\n.avatar__img > img[data-v-21dd05bf] {\n  display: block;\n}\n.copyright[data-v-21dd05bf] {\n  grid-area: copyright;\n}\n.menu[data-v-21dd05bf] {\n  grid-area: menu;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.logo[data-v-21dd05bf] {\n  grid-area: logo;\n}\n.menu__text[data-v-21dd05bf] {\n  display: none;\n}\n@media screen and (min-width: 850px) {\nsidebar[data-v-21dd05bf] {\n    grid-template-areas: \"logo\" \"avatar\" \"menu\" \"copyright\";\n    grid-template-columns: 1fr;\n    grid-template-rows: 50px auto 1fr 50px;\n}\n.menu[data-v-21dd05bf] {\n    flex-direction: column;\n    align-items: normal;\n    justify-content: flex-start;\n}\n.menu__text[data-v-21dd05bf] {\n    display: inline-block;\n}\n.avatar[data-v-21dd05bf] {\n    flex-direction: column;\n}\n.avatar__name[data-v-21dd05bf] {\n    margin: 1em 0;\n}\n.avatar__img > img[data-v-21dd05bf] {\n    border-radius: 50%;\n}\n}\n.toolbar[data-v-21dd05bf] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 24px;\n}\n.calendar__week[data-v-21dd05bf],\n.calendar__header[data-v-21dd05bf] {\n  display: grid;\n  grid-template-columns: repeat(7, 1fr);\n}\n.calendar__week[data-v-21dd05bf] {\n  grid-auto-rows: 170px;\n  text-align: right;\n}\n.calendar__header[data-v-21dd05bf] {\n  grid-auto-rows: 50px;\n  align-items: center;\n  text-align: center;\n}\n\n/* COSMETIC STYLING */\n.copyright[data-v-21dd05bf] {\n  font-size: 0.7rem;\n  font-weight: 400;\n}\n.calendar[data-v-21dd05bf] {\n  background-color: white;\n  border: 1px solid #e1e1e1;\n}\n.calendar__header > div[data-v-21dd05bf] {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  font-weight: bold;\n}\n.calendar__day[data-v-21dd05bf] {\n  border-right: 1px solid #e1e1e1;\n  border-top: 1px solid #e1e1e1;\n  height: 150px;\n}\n.calendar__day .guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.calendar__day .eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.calendar__day .curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.compensa2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: yellow;\n}", ""]);
 
 // exports
 
@@ -8261,7 +8416,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.roig {\n    background: red;\n    border: 1px solid black;\n    border-radius: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.roig {\n    background: rgb(223, 216, 216);\n    border: 1px solid black;\n    border-radius: 10px;\n}\n", ""]);
 
 // exports
 
@@ -41253,7 +41408,14 @@ var render = function() {
       { staticClass: "col-lg-3 col-md-3" },
       [
         _c("datepicker", {
-          attrs: { language: _vm.es, "monday-first": true, inline: true },
+          attrs: {
+            "bootstrap-styling": true,
+            wrapperClass: _vm.shadow - _vm.lg,
+            "input-class": _vm.shadow - _vm.lg,
+            language: _vm.es,
+            "monday-first": true,
+            inline: true
+          },
           model: {
             value: _vm.fecha,
             callback: function($$v) {
@@ -41262,8 +41424,10 @@ var render = function() {
             expression: "fecha"
           }
         }),
-        _vm._v("\n         " + _vm._s(_vm.fechas) + "\n         "),
-        _c("estadisticas-component")
+        _vm._v(" "),
+        _c("estadisticas-component", {
+          attrs: { setmana: _vm.sem, any: _vm.any }
+        })
       ],
       1
     ),
@@ -41616,7 +41780,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-lg",
-              attrs: { type: "button" },
+              attrs: { type: "button", disabled: "" },
               on: { click: _vm.escribir_datos }
             },
             [_vm._v("Actualitza")]
@@ -41929,7 +42093,50 @@ var render = function() {
               }),
               _c("label", { staticClass: "curs2", attrs: { for: "curs" } }, [
                 _vm._v("Curs")
-              ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.check_compensa,
+                    expression: "check_compensa"
+                  }
+                ],
+                attrs: { type: "checkbox", id: "compensa" },
+                domProps: {
+                  checked: Array.isArray(_vm.check_compensa)
+                    ? _vm._i(_vm.check_compensa, null) > -1
+                    : _vm.check_compensa
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.check_compensa,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.check_compensa = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.check_compensa = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.check_compensa = $$c
+                    }
+                  }
+                }
+              }),
+              _c(
+                "label",
+                { staticClass: "compensa2", attrs: { for: "compensa" } },
+                [_vm._v("Compensa")]
+              )
             ])
           ]),
           _vm._v(" "),
@@ -41985,7 +42192,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "eixida2" }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "curs2" })
+                        _c("div", { staticClass: "curs2" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "compensa2" })
                       ]
                     )
                   }),
@@ -42151,9 +42360,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "wrapper" }, [
+    _c("div", { staticClass: "wrapper shadow-lg rounded" }, [
       _c("textarea", {
-        attrs: { name: "este", id: "area_dia", cols: "30", rows: "2" },
+        attrs: { name: "este", id: _vm._uid + 1, cols: "30", rows: "2" },
         domProps: { value: this.prova2 },
         on: {
           input: function($event) {
@@ -42424,20 +42633,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "roig col-lg-9 col-md-9 mt-5 ml-3 shadow p-3 mb-5 bg-white rounded"
+      },
+      [
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-dog" }),
+          _vm._v(" GUARDIA: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.guardia))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-chalkboard-teacher" }),
+          _vm._v(" CURS: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.curs))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-umbrella-beach" }),
+          _vm._v(" COMPENSA: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.compensa))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-check" }),
+          _vm._v(" CEFIRE: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.cefire))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-school" }),
+          _vm._v(" VISITA: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.visita))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-3 m-2" }, [
+          _c("i", { staticClass: "fas fa-procedures" }),
+          _vm._v(" PERMÍS: "),
+          _c("b", [_vm._v(_vm._s(_vm.estadistica_conta.permis))])
+        ])
+      ]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "roig" }, [
-        _c("div", { staticClass: "ml-3" }, [_vm._v("Prova")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

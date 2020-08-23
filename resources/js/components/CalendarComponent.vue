@@ -3,9 +3,9 @@
 
 
         <div class="col-lg-3 col-md-3">
-            <datepicker :language="es" :monday-first="true" :inline="true" v-model="fecha"></datepicker>
-             {{fechas}}
-             <estadisticas-component></estadisticas-component>
+            <datepicker :bootstrap-styling="true" :wrapperClass="shadow-lg" :input-class="shadow-lg" :language="es" :monday-first="true" :inline="true" v-model="fecha"></datepicker>
+             <!-- {{fechas}} -->
+             <estadisticas-component :setmana="sem" :any="any"></estadisticas-component>
         </div>
         <div class="col-lg-9 col-md-9">
                     <div class="row">
@@ -78,7 +78,7 @@
                             <diacamp-component :prova2.sync='fechas["TxtTardeD"]' :setmana="sem" :any="any" dia="TxtTardeD"></diacamp-component>
                         </div>
                          <div class="col-lg-10 mt-5 text-right">
-                        <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos">Actualitza</button>
+                        <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos" disabled>Actualitza</button>
 
                     </div>
 
@@ -244,6 +244,12 @@
                 this.fechas['NidSemana']=this.sem;
                 this.fechas['NidAnyo']=this.any;
                 this.leer_datos(this.any,this.sem);
+            },
+            fechas: {
+                handler: function() {
+                    this.escribir_datos();
+                },
+                deep: true
             }
         },
 

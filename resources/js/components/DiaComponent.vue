@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="wrapper">
-                    <textarea name="este" id="area_dia" cols="30" rows="2" :value="this.prova2" @input="$emit('update:prova2', $event.target.value)"></textarea>
+        <div class="wrapper shadow-lg rounded">
+                    <textarea name="este" :id="_uid+1" cols="30" rows="2" :value="this.prova2" @input="$emit('update:prova2', $event.target.value)"></textarea>
             <div class="controls">
 
                 <button data-toggle="tooltip" data-placement="bottom" title="CEFIRE" @click="cefire('CEFIRE')" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></button>
@@ -53,7 +53,8 @@
                 file: null,
                 link_dia: null,
                 titul: '',
-                fileUpload: null
+                fileUpload: null,
+                uuid: null
             }
         },
         props: ['prova2','setmana','any','dia'],
@@ -79,8 +80,8 @@
             borra() {
                 this.prova2='';
                 this.$emit('update:prova2',this.prova2);
-                document.getElementById('area_dia').value='';
-                $("#area_dia").prop("disabled", false);
+                document.getElementById(this.uuid).value='';
+                $(this.uuid).prop("disabled", false);
             },
             este() {
 
@@ -176,6 +177,9 @@
             //     }
             // }
         },
+        beforeCreate() {
+            this.uuid = this._uid;
+        }
 
     }
 </script>

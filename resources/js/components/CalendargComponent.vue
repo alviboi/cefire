@@ -16,6 +16,8 @@
               <input type="checkbox" id="guardia" v-model="check_guardia"><label class='guardia2' for="guardia">Guàrdia</label>
               <input type="checkbox" id="eixida" v-model="check_eixida"><label class='eixida2' for="eixida">Eixida</label>
               <input type="checkbox" id="curs" v-model="check_curs"><label  class='curs2' for="curs">Curs</label>
+            <input type="checkbox" id="compensa" v-model="check_compensa"><label  class='compensa2' for="compensa">Compensa</label>
+
             </div>
           </div>
           <div class="current-month">
@@ -48,6 +50,7 @@
                 <div class="guardia2"></div>
                 <div class="eixida2"></div>
                 <div class="curs2"></div>
+                <div class="compensa2"></div>
               </div>
             </div>
           </div>
@@ -109,6 +112,7 @@ export default {
       check_eixida: false,
       check_guardia: false,
       check_curs: false,
+      check_compensa: false,
       dia: null,
       mes: null,
       any: null,
@@ -158,9 +162,14 @@ export default {
         this.check_eixida=false;
         this.check_curs=false;
         this.check_guardia=false;
+        this.check_compensa=false;
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+    },
+    posa_compensa(a, b, nombre) {
+      var str = "<div style='font-size:10px;' class='concepte compensa'>" + nombre + "</div>";
+      $("#s" + a + "d" + b +' .compensa2').append(str);
     },
     posa_guardia(a, b, nombre) {
       var str = "<div style='font-size:10px;' class='concepte guardia'>" + nombre + "</div>";
@@ -292,7 +301,50 @@ export default {
         });console.log(this.guardies);
 
       }
+    },
+
+
+///////////////guardies////////////////////////////77
+    async agafa_datos_compensa() {
+      //alert(this.primer_dia);
+      for (let set = 0; set < this.setmanes + 1; set++) {
+        await axios
+          .get(
+            "/guardias/" +
+              (this.primer_dia_2.getWeek() + (set)) +
+              "/" +
+              this.avui.getFullYear()
+          )
+          .then(response => (this.guardies = response.data))
+          .catch(function(error) {
+            console.log(error);
+          });
+
+               // console.log(this.guardies);
+        this.guardies.forEach(element => {
+          this.arr = Object.values(element);
+            console.log(this.arr);
+          for (let index = 0; index < 14; index++) {
+            if (
+              this.arr[index].includes("COMPENSA")
+            ) {
+              //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+              this.posa_compensa(
+                set+1,
+                Math.floor(index / 2 + 1) +
+                  (7 * (set) - this.primer_dia + 1),
+                this.arr[14]
+              );
+            }
+            //this.posa_guardia(1,1,'aaa');
+          }
+        });console.log(this.guardies);
+
+      }
     }
+
+
+
   },
   watch: {
       check_eixida(newValue, oldValue) {
@@ -318,6 +370,14 @@ export default {
           } else {
               $(".curs").remove();
           }
+      },
+      check_compensa(newValue, oldValue) {
+
+          if (this.check_compensa){
+              this.agafa_datos_compensa();
+          } else {
+              $(".compensa").remove();
+          }
       }
   },
   mounted () {
@@ -335,6 +395,9 @@ export default {
 }
 .curs {
     border: solid 1px green;
+}
+.compensa {
+    border: solid 1px yellow;
 }
 
 .wrapper {
@@ -585,6 +648,11 @@ sidebar {
     padding: 1px;
     align-content: left;
     color: green;
+  }
+  .compensa2 {
+    padding: 1px;
+    align-content: left;
+    color: yellow;
   }
 
 

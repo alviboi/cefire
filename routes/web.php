@@ -69,6 +69,6 @@ Route::post('afg_guardia/','HorarioController@afg_guardia')->name('afg_guardia')
 
 Route::get('permisos_tots_concret/{id}/','PermisosController@torna_concret');
 
-Route::get('estadistica/{any}/{setmana}/','EstadisticasController@estadisticas');
+Route::get('estadistica/{any}/{setmana}','EstadisticasController@estadisticas');
 
 
