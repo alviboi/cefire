@@ -12,16 +12,16 @@ class EstadisticasController extends Controller
 
     public function busca_paraula($paraula,$any,$setmana) {
         $asesor=auth()->user()->Nid_Asesor;
-        if ($setmana>35) {
+        if ($setmana>=35) {
             $any++;
         }
         $result=Horario::where(function($query) use ($any,$asesor) {
             $query->where('NidAnyo','=', $any);
-            $query->where('NidSemana','<=',35);
+            $query->where('NidSemana','<',35);
             $query->where('NidAsesor','=',$asesor);
         })->orWhere(function($query) use ($any,$asesor) {
             $query->where('NidAnyo','=', $any-1);
-            $query->where('NidSemana','>',35);
+            $query->where('NidSemana','>=',35);
             $query->where('NidAsesor','=',$asesor);
         })
             ->where('TxtManyanaL', 'LIKE', "%".$paraula."%")->
