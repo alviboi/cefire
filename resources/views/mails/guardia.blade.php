@@ -8,9 +8,9 @@
     </head>
     <body>
         <h1>Guardia afegida</h1>
-        <h2><b>Assesor: </b>{{ $dat['nombre'] }}</h2>
-        <h2><b>Fecha: </b>{{ $dat['fecha'] }} per la {{ $dat['rato'] }}</h2>
+        <h2><b>Assessor: </b>{{ $dat['nombre'] }}</h2>
+        <h2><b>Data: </b>{{ $dat['fecha'] }} {{ $dat['rato'] }}</h2>
         <br><br>
-    <h2><a href="{{ $dat ['link'] }}">Añadir a Google Calendar</a></h2>
+    <h2><a href="{{ $dat ['link'] }}">Afegir a Google Calendar</a></h2>
     </body>
 </html>

@@ -2061,11 +2061,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   Date.prototype.getDayName = function () {
     return days[this.getDay()];
   };
-})();
+})(); //var now = new Date();
+//var day = now.getDayName();
+//var month = now.getMonthName();
 
-var now = new Date();
-var day = now.getDayName();
-var month = now.getMonthName();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2077,9 +2077,6 @@ var month = now.getMonthName();
       arr: [7][7],
       guardia: [],
       eixides: [],
-      check_eixida: false,
-      check_guardia: false,
-      check_curs: false,
       dia: null,
       mes: null,
       any: null,
@@ -2096,6 +2093,7 @@ var month = now.getMonthName();
       this.mes = this.avui.getMonth();
       this.any = this.avui.getFullYear();
       this.primer_dia = new Date(this.any, this.mes, 1).getDay();
+      this.primer_dia2 = new Date(this.any, this.mes, 1);
       this.dies_mes = new Date(this.any, this.mes + 1, 1);
       this.dies_mes2 = new Date(this.dies_mes - 1);
       this.dies_mes = this.dies_mes2.getDate(); //traure últim dia del mes
@@ -2115,12 +2113,12 @@ var month = now.getMonthName();
       console.log(this.setmanes);
     },
     canvia_mes: function canvia_mes(mes_sum) {
-      this.check_eixida = false;
-      this.check_curs = false;
-      this.check_guardia = false;
-      $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+      var self = this;
+      $('select option[selected="selected"]').each(function () {
+        $(this).removeAttr('selected');
+      });
       this.agafa_datos_guardies();
     },
     onChange: function onChange(event, mv, dia) {
@@ -2203,13 +2201,13 @@ var month = now.getMonthName();
                 set = 0;
 
               case 1:
-                if (!(set < _this2.setmanes + 1)) {
+                if (!(set < _this2.setmanes)) {
                   _context2.next = 39;
                   break;
                 }
 
                 _context2.next = 4;
-                return axios.get("/guardias/" + (_this2.avui.getWeek() + set - 1) + "/" + _this2.avui.getFullYear()).then(function (response) {
+                return axios.get("/guardias/" + (_this2.primer_dia2.getWeek() + set) + "/" + _this2.avui.getFullYear()).then(function (response) {
                   return _this2.guardies = response.data;
                 })["catch"](function (error) {
                   console.log(error);
@@ -2315,26 +2313,8 @@ var month = now.getMonthName();
     }
   },
   watch: {
-    check_eixida: function check_eixida(newValue, oldValue) {
-      if (this.check_eixida) {
-        this.agafa_datos_eixides();
-      } else {
-        $(".eixida").remove();
-      }
-    },
-    check_guardia: function check_guardia(newValue, oldValue) {
-      if (this.check_guardia) {
-        this.agafa_datos_guardies();
-      } else {
-        $(".guardia").remove();
-      }
-    },
-    check_curs: function check_curs(newValue, oldValue) {
-      if (this.check_curs) {
-        this.agafa_datos_curs();
-      } else {
-        $(".curs").remove();
-      }
+    avui: function avui(newValue, oldValue) {
+      alert(newValue);
     }
   },
   mounted: function mounted() {

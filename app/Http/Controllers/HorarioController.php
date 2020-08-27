@@ -205,43 +205,107 @@ class HorarioController extends Controller
 
     public function afg_guardia(Request $request){
         $horario=Horario::where('NidAsesor', $request->Assessor)->where('NidSemana',$request->setmana)->where('NidAnyo', $request->anyo)->first();
+        //Comprovem que no hi ha altra guardia en eixe dia i li enviem un correu per a que ho sàpiga
 
-        $horario2=Horario::where('NidSemana',$request->setmana)->where('NidAnyo', $request->anyo)->where($request->camp, 'LIKE', "%GUARDIA%")->first();
+        $mati_vesprada=substr($request->camp,3,-1);
+        $fecha_GUARDIA =$this->getStartAndEndDate($request->setmana,$request->anyo,$request->camp);
 
-        if(!$horario2->isEmpty()){
-            $val2 = $horario2->{$request->camp};
-            $val2 = str_replace("GUARDIA","",$val2);
-            //echo $val;
-            $horario2->{$request->camp}=$val2;
-            $horario2->save();
-
-            $usuario2=User::where('Nid_Asesor', $horario2->NidAsesor)->first();
-        //var_dump($usuario->email);
-
-            //Mail::to($usuario->email)->send(new EnviarGuardia($datos));
-
-
+        if ($mati_vesprada=="Manyana") {
+            $hora_start="090000";
+            $hora_end="140000";
+            $txt_rato="pel Matí";
+        } else {
+            $hora_start=160000;
+            $hora_end=200000;
+            $txt_rato="per la Vesprada";
         }
 
 
+
+
+        $horario2=Horario::where('NidSemana',$request->setmana)->where('NidAnyo', $request->anyo)->where($request->camp, 'LIKE', "%GUARDIA%")->first();
+
+
+            if($horario2) {
+                $val2 = $horario2->{$request->camp};
+                $val2 = str_replace("GUARDIA","",$val2);
+                //echo $val;
+                $horario2->{$request->camp}=$val2;
+                $horario2->save();
+                $usuario2=User::where('Nid_Asesor', $horario2->NidAsesor)->first();
+                $link2="https://calendar.google.com/calendar/render?action=TEMPLATE&text=GUARDIA+CEFIRE+ELIMINADA&dates=".$fecha_GUARDIA."T".$hora_start."/".$fecha_GUARDIA."T".$hora_end."&details=Guardia+del+Cefire+de+Valencia+eliminada&location=Valencia&trp=false#eventpage_6";
+
+                $datos2 = [
+                    'nombre' => $usuario2->name,
+                    'fecha' => date("d/m/Y", strtotime($fecha_GUARDIA)),
+                    'rato' => $txt_rato,
+                    'link' => $link2
+                ];
+
+
+
+
+                Mail::to($usuario2->email)->send(new EliminarGuardia($datos2));
+            }
+
+
+        // if ($horario2 === null) {
+        //     $horario2=new Horario();
+        //     $horario2->NidAsesor=auth()->user()->Nid_Asesor;
+        //     $horario2->NidSemana=$request->setmana;
+        //     $horario2->NidAnyo=$request->anyo;
+        //     // $horario2->TxtManyanaL ="";
+        //     // $horario2->TxtTardeL ="";
+        //     // $horario2->TxtManyanaM ="";
+        //     // $horario2->TxtTardeM ="";
+        //     // $horario2->TxtManyanaX ="";
+        //     // $horario2->TxtTardeX ="";
+        //     // $horario2->TxtManyanaJ ="";
+        //     // $horario2->TxtTardeJ="";
+        //     // $horario2->TxtManyanaV="";
+        //     // $horario2->TxtTardeV="";
+        //     // $horario2->TxtManyanaS="";
+        //     // $horario2->TxtTardeS="";
+        //     // $horario2->TxtManyanaD="";
+        //     // $horario2->TxtTardeD="";
+        //     // $horario2->TxtObservaciones="";
+        //     $horario2->save();
+        //     $usuario2=User::where('Nid_Asesor', $horario2->NidAsesor)->first();
+        // } else
+
+
+
         //var_dump($horario2->toArray());
+        // Si no està creat el camp el creem
         if ($horario) {
         }else{
             $horario=new Horario();
             $horario->NidAsesor=$request->Assessor;
             $horario->NidSemana=$request->setmana;
             $horario->NidAnyo=$request->anyo;
+            $horario->TxtManyanaL ="";
+            $horario->TxtTardeL ="";
+            $horario->TxtManyanaM ="";
+            $horario->TxtTardeM ="";
+            $horario->TxtManyanaX ="";
+            $horario->TxtTardeX ="";
+            $horario->TxtManyanaJ ="";
+            $horario->TxtTardeJ="";
+            $horario->TxtManyanaV="";
+            $horario->TxtTardeV="";
+            $horario->TxtManyanaS="";
+            $horario->TxtTardeS="";
+            $horario->TxtManyanaD="";
+            $horario->TxtTardeD="";
+            $horario->TxtObservaciones="";
         }
-        // foreach ($horario as $key => $value) {
-        //     echo $key;
-        //     echo "<br>";
-        //     echo $value;
-        //     echo "<br>";
-        //     if($key==$request->camp){
-        //         $horario->$key=$value." GUARDIA";
-        //     }
-        // }
-        // var_dump($horario);
+
+
+
+
+
+
+
         $val = $horario->{$request->camp};
         //echo $val;
         $horario->{$request->camp}="GUARDIA ".$val;
@@ -254,18 +318,7 @@ class HorarioController extends Controller
         $usuario=User::where('Nid_Asesor', $request->Assessor)->first();
         //var_dump($usuario->email);
 
-        $mati_vesprada=substr($request->camp,3,-1);
-        $fecha_GUARDIA =$this->getStartAndEndDate($request->setmana,$request->anyo,$request->camp);
 
-        if ($mati_vesprada=="Manyana") {
-            $hora_start="090000";
-            $hora_end="140000";
-            $txt_rato="Matí";
-        } else {
-            $hora_start=160000;
-            $hora_end=200000;
-            $txt_rato="Vesprada";
-        }
 
 
 
@@ -281,19 +334,7 @@ class HorarioController extends Controller
         Mail::to($usuario->email)->send(new EnviarGuardia($datos));
 
 
-        $link2="https://calendar.google.com/calendar/render?action=TEMPLATE&text=GUARDIA+CEFIRE+ELIMINADA&dates=".$fecha_GUARDIA."T".$hora_start."/".$fecha_GUARDIA."T".$hora_end."&details=Guardia+del+Cefire+de+Valencia+eliminada&location=Valencia&trp=false#eventpage_6";
 
-        $datos2 = [
-            'nombre' => $usuario2->name,
-            'fecha' => date("d/m/Y", strtotime($fecha_GUARDIA)),
-            'rato' => $txt_rato,
-            'link' => $link2
-        ];
-
-
-
-
-        Mail::to($usuario2->email)->send(new EliminarGuardia($datos));
 
 
 

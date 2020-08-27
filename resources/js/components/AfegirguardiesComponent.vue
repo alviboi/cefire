@@ -122,10 +122,10 @@
     };
 })();
 
-var now = new Date();
+//var now = new Date();
 
-var day = now.getDayName();
-var month = now.getMonthName();
+//var day = now.getDayName();
+//var month = now.getMonthName();
 export default {
   data() {
     return {
@@ -138,9 +138,6 @@ export default {
       arr: [7][7],
       guardia: [],
       eixides: [],
-      check_eixida: false,
-      check_guardia: false,
-      check_curs: false,
       dia: null,
       mes: null,
       any: null,
@@ -170,6 +167,7 @@ export default {
       this.mes = this.avui.getMonth();
       this.any = this.avui.getFullYear();
       this.primer_dia = new Date(this.any, this.mes, 1).getDay();
+      this.primer_dia2 = new Date(this.any, this.mes, 1);
       this.dies_mes = new Date(this.any, this.mes + 1, 1);
       this.dies_mes2 = new Date(this.dies_mes - 1);
       this.dies_mes = this.dies_mes2.getDate(); //traure últim dia del mes
@@ -186,14 +184,18 @@ export default {
       console.log(this.setmanes);
     },
     canvia_mes(mes_sum) {
-        this.check_eixida=false;
-        this.check_curs=false;
-        this.check_guardia=false;
-      $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
-      this.agafa_datos_guardies();
+      var self = this;
+      $('select option[selected="selected"]').each(
+            function() {
+                $(this).removeAttr('selected');
+            }
+        );
+    this.agafa_datos_guardies();
+
     },
+
     onChange(event, mv, dia) {
         console.log(event);
         let dia_escollit = new Date(this.any, this.mes, dia);
@@ -258,12 +260,12 @@ export default {
 
 
     async agafa_datos_guardies() {
-      //alert(this.primer_dia);
-      for (let set = 0; set < this.setmanes + 1; set++) {
+      //alert(this.primer_dia2);
+      for (let set = 0; set < this.setmanes; set++) {
         await axios
           .get(
             "/guardias/" +
-              (this.avui.getWeek() + set - 1) +
+              (this.primer_dia2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
@@ -367,29 +369,8 @@ export default {
     }
   },
   watch: {
-      check_eixida(newValue, oldValue) {
-
-          if (this.check_eixida){
-              this.agafa_datos_eixides();
-          } else {
-              $(".eixida").remove();
-          }
-      },
-      check_guardia(newValue, oldValue) {
-
-          if (this.check_guardia){
-              this.agafa_datos_guardies();
-          } else {
-              $(".guardia").remove();
-          }
-      },
-      check_curs(newValue, oldValue) {
-
-          if (this.check_curs){
-              this.agafa_datos_curs();
-          } else {
-              $(".curs").remove();
-          }
+      avui(newValue, oldValue) {
+          alert(newValue);
       }
   },
   mounted () {
