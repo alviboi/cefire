@@ -27,6 +27,8 @@
         "@fortawesome/fontawesome-free": "^5.13.0",
         "build": "^0.1.4",
         "vue-axios": "^2.1.5",
+        "vue-simple-alert": "^1.1.1",
+        "vue-toastification": "^1.7.6",
         "vuejs-datepicker": "^1.6.2"
     }
 }

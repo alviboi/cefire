@@ -145,7 +145,7 @@ class HorarioController extends Controller
         $horario->TxtTardeD=$request->TxtTardeD;
         $horario->TxtObservaciones=$request->TxtObservaciones;
         $horario->save();
-        return back()->with('mensaje', 'Nota editada!');
+        return "Dades guardades";
 
 
     }

@@ -79,6 +79,8 @@
                         </div>
                          <div class="col-lg-10 mt-5 text-right">
                         <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos">Actualitza</button>
+                        <button type="button" class="btn btn-primary btn-lg" @click="este">Notifica</button>
+
 
                     </div>
 
@@ -139,7 +141,7 @@
 
 
     import Datepicker from 'vuejs-datepicker';
-    import {es, en} from 'vuejs-datepicker/dist/locale';
+    import {es, en, ca} from 'vuejs-datepicker/dist/locale';
     import VueAxios from 'vue-axios'
 
 
@@ -190,6 +192,25 @@
             }
         },
         methods: {
+            este() {
+                this.$alert("Hello Vue Simple Alert.");
+            },
+            notifica(missatge) {
+                this.$toast.success(missatge, {
+                position: "top-right",
+                timeout: 4000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                closeButton: "button",
+                icon: true,
+                rtl: false,
+                hideProgressBar: false
+                });
+            },
             leer_datos(any,sem) {
                 this.fechas['NidSemana']=this.sem;
                 this.fechas['NidAnyo']=this.any;
@@ -216,12 +237,14 @@
                 //console.log(this.fechas);
             },
             escribir_datos() {
+                self=this;
                 this.fechas['NidSemana']=this.sem;
                 this.fechas['NidAnyo']=this.any;
-                axios.post('/horario/',this.fechas).then(response => (this.info = response.data)).catch(function (error) {
+                axios.post('/horario/',this.fechas).then(response => (
+                    self.notifica(response.data)
+                )).catch(function (error) {
                     console.log(error);
                 });
-                console.log(this.info);
             }
         },
         mounted() {
@@ -244,7 +267,7 @@
                 this.fechas['NidSemana']=this.sem;
                 this.fechas['NidAnyo']=this.any;
                 this.leer_datos(this.any,this.sem);
-            },
+            }
             // fechas: {
             //     handler: function() {
             //         this.escribir_datos();
