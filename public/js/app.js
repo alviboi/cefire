@@ -2528,9 +2528,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    este: function este() {
-      this.$alert("Hello Vue Simple Alert.");
-    },
+    //
     notifica: function notifica(missatge) {
       this.$toast.success(missatge, {
         position: "top-right",
@@ -44725,16 +44723,6 @@ var render = function() {
               on: { click: _vm.escribir_datos }
             },
             [_vm._v("Actualitza")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-lg",
-              attrs: { type: "button" },
-              on: { click: _vm.este }
-            },
-            [_vm._v("Notifica")]
           )
         ])
       ])

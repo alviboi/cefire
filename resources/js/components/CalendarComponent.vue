@@ -79,7 +79,7 @@
                         </div>
                          <div class="col-lg-10 mt-5 text-right">
                         <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos">Actualitza</button>
-                        <button type="button" class="btn btn-primary btn-lg" @click="este">Notifica</button>
+                        <!-- <button type="button" class="btn btn-primary btn-lg" @click="este">Notifica</button> -->
 
 
                     </div>
@@ -192,9 +192,7 @@
             }
         },
         methods: {
-            este() {
-                this.$alert("Hello Vue Simple Alert.");
-            },
+            //
             notifica(missatge) {
                 this.$toast.success(missatge, {
                 position: "top-right",
