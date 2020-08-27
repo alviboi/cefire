@@ -2582,13 +2582,13 @@ __webpack_require__.r(__webpack_exports__);
       this.fechas['NidSemana'] = this.sem;
       this.fechas['NidAnyo'] = this.any;
       this.leer_datos(this.any, this.sem);
-    },
-    fechas: {
-      handler: function handler() {
-        this.escribir_datos();
-      },
-      deep: true
-    }
+    } // fechas: {
+    //     handler: function() {
+    //         this.escribir_datos();
+    //     },
+    //     deep: true
+    // }
+
   }
 });
 
@@ -41760,7 +41760,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-lg",
-              attrs: { type: "button", disabled: "" },
+              attrs: { type: "button" },
               on: { click: _vm.escribir_datos }
             },
             [_vm._v("Actualitza")]

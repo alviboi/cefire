@@ -19,10 +19,10 @@ class EstadisticasController extends Controller
             $query->where('NidAnyo','=', $any);
             $query->where('NidSemana','<',35);
             $query->where('NidAsesor','=',$asesor);
-        })->orWhere(function($query) use ($any,$asesor) {
-            $query->where('NidAnyo','=', $any-1);
-            $query->where('NidSemana','>=',35);
-            $query->where('NidAsesor','=',$asesor);
+        })->orWhere(function($query2) use ($any,$asesor) {
+            $query2->where('NidAnyo','=', $any-1);
+            $query2->where('NidSemana','>=',35);
+            $query2->where('NidAsesor','=',$asesor);
         })->get();
             // ->where('TxtManyanaL', 'LIKE', "%".$paraula."%")->
             // where('TxtManyanaM', 'LIKE', "%".$paraula."%")->
@@ -42,8 +42,8 @@ class EstadisticasController extends Controller
         $result_arr=$result->toArray();
         $conta=0;
 
-        foreach ($result_arr as $key => $value2) {
-            foreach ($value2 as $key2 => $value) {
+        foreach ($result_arr as $value2) {
+            foreach ($value2 as $value) {
                 # code...
                 if (is_string($value) && strpos($value,"".$paraula."") !== false) {
                     $conta=$conta+1;

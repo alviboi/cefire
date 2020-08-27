@@ -78,7 +78,7 @@
                             <diacamp-component :prova2.sync='fechas["TxtTardeD"]' :setmana="sem" :any="any" dia="TxtTardeD"></diacamp-component>
                         </div>
                          <div class="col-lg-10 mt-5 text-right">
-                        <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos" disabled>Actualitza</button>
+                        <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos">Actualitza</button>
 
                     </div>
 
@@ -245,12 +245,12 @@
                 this.fechas['NidAnyo']=this.any;
                 this.leer_datos(this.any,this.sem);
             },
-            fechas: {
-                handler: function() {
-                    this.escribir_datos();
-                },
-                deep: true
-            }
+            // fechas: {
+            //     handler: function() {
+            //         this.escribir_datos();
+            //     },
+            //     deep: true
+            // }
         },
 
     }
