@@ -10,71 +10,71 @@
         <div class="col-lg-9 col-md-9">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaL"><h4>Lunes Mañana</h4></label>
+                            <label for="TxtManyanaL"><h4>Dilluns Matí</h4></label>
                             <diacamp-component id="TxtManyanaL" :prova2.sync='fechas["TxtManyanaL"]' :setmana="sem" :any="any" dia="TxtManyanaL"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeL"><h4>Lunes Tarde</h4></label>
+                            <label for="TxtTardeL"><h4>Dilluns Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeL"]' :setmana="sem" :any="any" dia="TxtTardeL"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaM"><h4>Martes Mañana</h4></label>
+                            <label for="TxtManyanaM"><h4>Dimarts Matí</h4></label>
                             <diacamp-component id="TxtManyanaM" :prova2.sync='fechas["TxtManyanaM"]' :setmana="sem" :any="any" dia="TxtManyanaM"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeM"><h4>Martes Tarde</h4></label>
+                            <label for="TxtTardeM"><h4>Dimarts Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeM"]' :setmana="sem" :any="any" dia="TxtTardeM"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaX"><h4>Miércoles Mañana</h4></label>
+                            <label for="TxtManyanaX"><h4>Dimecres Matí</h4></label>
                             <diacamp-component id="TxtManyanaX" :prova2.sync='fechas["TxtManyanaX"]' :setmana="sem" :any="any" dia="TxtManyanaX"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeX"><h4>Miércoles Tarde</h4></label>
+                            <label for="TxtTardeX"><h4>Dimecres Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeX"]' :setmana="sem" :any="any" dia="TxtTardeX"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaJ"><h4>Jueves Mañana</h4></label>
+                            <label for="TxtManyanaJ"><h4>Dijous Matí</h4></label>
                             <diacamp-component id="TxtManyanaJ" :prova2.sync='fechas["TxtManyanaJ"]' :setmana="sem" :any="any" dia="TxtManyanaJ"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeJ"><h4>Jueves Tarde</h4></label>
+                            <label for="TxtTardeJ"><h4>Dijous Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeJ"]' :setmana="sem" :any="any" dia="TxtTardeJ"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaV"><h4>Viernes Mañana</h4></label>
+                            <label for="TxtManyanaV"><h4>Divendres Matí</h4></label>
                             <diacamp-component id="TxtManyanaV" :prova2.sync='fechas["TxtManyanaV"]' :setmana="sem" :any="any" dia="TxtManyanaV"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeV"><h4>Viernes Tarde</h4></label>
+                            <label for="TxtTardeV"><h4>Divendres Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeV"]' :setmana="sem" :any="any" dia="TxtTardeV"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaS"><h4>Sábado Mañana</h4></label>
+                            <label for="TxtManyanaS"><h4>Dissabte Matí</h4></label>
                             <diacamp-component id="TxtManyanaS" :prova2.sync='fechas["TxtManyanaS"]' :setmana="sem" :any="any" dia="TxtManyanaS"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeS"><h4>Sábado Tarde</h4></label>
+                            <label for="TxtTardeS"><h4>Dissabte Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeS"]' :setmana="sem" :any="any" dia="TxtTardeS"></diacamp-component>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtManyanaS"><h4>Domingo Mañana</h4></label>
+                            <label for="TxtManyanaS"><h4>Diumenge Matí</h4></label>
                             <diacamp-component id="TxtManyanaS" :prova2.sync='fechas["TxtManyanaD"]' :setmana="sem" :any="any" dia="TxtManyanaD"></diacamp-component>
                         </div>
                         <div class="col-lg-6 col-md-6 pb-2">
-                            <label for="TxtTardeD"><h4>Domingo Tarde</h4></label>
+                            <label for="TxtTardeD"><h4>Diumenge Vesprada</h4></label>
                             <diacamp-component :prova2.sync='fechas["TxtTardeD"]' :setmana="sem" :any="any" dia="TxtTardeD"></diacamp-component>
                         </div>
                          <div class="col-lg-10 mt-5 text-right">

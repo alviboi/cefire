@@ -41776,7 +41776,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaL" } }, [
-      _c("h4", [_vm._v("Lunes Mañana")])
+      _c("h4", [_vm._v("Dilluns Matí")])
     ])
   },
   function() {
@@ -41784,7 +41784,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeL" } }, [
-      _c("h4", [_vm._v("Lunes Tarde")])
+      _c("h4", [_vm._v("Dilluns Vesprada")])
     ])
   },
   function() {
@@ -41792,7 +41792,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaM" } }, [
-      _c("h4", [_vm._v("Martes Mañana")])
+      _c("h4", [_vm._v("Dimarts Matí")])
     ])
   },
   function() {
@@ -41800,7 +41800,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeM" } }, [
-      _c("h4", [_vm._v("Martes Tarde")])
+      _c("h4", [_vm._v("Dimarts Vesprada")])
     ])
   },
   function() {
@@ -41808,7 +41808,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaX" } }, [
-      _c("h4", [_vm._v("Miércoles Mañana")])
+      _c("h4", [_vm._v("Dimecres Matí")])
     ])
   },
   function() {
@@ -41816,7 +41816,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeX" } }, [
-      _c("h4", [_vm._v("Miércoles Tarde")])
+      _c("h4", [_vm._v("Dimecres Vesprada")])
     ])
   },
   function() {
@@ -41824,7 +41824,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaJ" } }, [
-      _c("h4", [_vm._v("Jueves Mañana")])
+      _c("h4", [_vm._v("Dijous Matí")])
     ])
   },
   function() {
@@ -41832,7 +41832,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeJ" } }, [
-      _c("h4", [_vm._v("Jueves Tarde")])
+      _c("h4", [_vm._v("Dijous Vesprada")])
     ])
   },
   function() {
@@ -41840,7 +41840,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaV" } }, [
-      _c("h4", [_vm._v("Viernes Mañana")])
+      _c("h4", [_vm._v("Divendres Matí")])
     ])
   },
   function() {
@@ -41848,7 +41848,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeV" } }, [
-      _c("h4", [_vm._v("Viernes Tarde")])
+      _c("h4", [_vm._v("Divendres Vesprada")])
     ])
   },
   function() {
@@ -41856,7 +41856,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaS" } }, [
-      _c("h4", [_vm._v("Sábado Mañana")])
+      _c("h4", [_vm._v("Dissabte Matí")])
     ])
   },
   function() {
@@ -41864,7 +41864,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeS" } }, [
-      _c("h4", [_vm._v("Sábado Tarde")])
+      _c("h4", [_vm._v("Dissabte Vesprada")])
     ])
   },
   function() {
@@ -41872,7 +41872,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtManyanaS" } }, [
-      _c("h4", [_vm._v("Domingo Mañana")])
+      _c("h4", [_vm._v("Diumenge Matí")])
     ])
   },
   function() {
@@ -41880,7 +41880,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "TxtTardeD" } }, [
-      _c("h4", [_vm._v("Domingo Tarde")])
+      _c("h4", [_vm._v("Diumenge Vesprada")])
     ])
   }
 ]

@@ -23,21 +23,21 @@ class EstadisticasController extends Controller
             $query->where('NidAnyo','=', $any-1);
             $query->where('NidSemana','>=',35);
             $query->where('NidAsesor','=',$asesor);
-        })
-            ->where('TxtManyanaL', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaM', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaX', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaJ', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaV', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaS', 'LIKE', "%".$paraula."%")->
-            where('TxtManyanaD', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeL', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeM', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeX', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeJ', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeV', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeS', 'LIKE', "%".$paraula."%")->
-            where('TxtTardeD', 'LIKE', "%".$paraula."%")->get();
+        })->get();
+            // ->where('TxtManyanaL', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaM', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaX', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaJ', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaV', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaS', 'LIKE', "%".$paraula."%")->
+            // where('TxtManyanaD', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeL', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeM', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeX', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeJ', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeV', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeS', 'LIKE', "%".$paraula."%")->
+            // where('TxtTardeD', 'LIKE', "%".$paraula."%")->get();
 
         $result_arr=$result->toArray();
         $conta=0;
