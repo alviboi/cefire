@@ -31,8 +31,8 @@
                         </div>
                     </div>
                 </div>
-                <input name="arxiu_pujar" @change="este()" :id="fileUpload" type="file" hidden>
-                <button data-toggle="tooltip" data-placement="bottom" title="PERMÍS" class="btn btn-primary btn-sm" @click="chooseFiles()"><i class="fas fa-procedures"></i></button>
+                <input name="arxiu_pujar" @change="este()" :id="fileUpload" type="file" ref="arxiu" hidden>
+                <button data-toggle="tooltip" data-placement="bottom" title="PERMÍS" class="btn btn-primary btn-sm" @click="chooseFiles($event)"><i class="fas fa-procedures"></i></button>
                 <button data-toggle="tooltip" data-placement="bottom" title="BORRA" @click="borra()" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
             </div>
 
@@ -53,7 +53,7 @@
                 file: null,
                 link_dia: null,
                 titul: '',
-                fileUpload: null,
+                fileUpload: 0,
                 uuid: null
             }
         },
@@ -75,7 +75,10 @@
                 //this.$emit('update:prova2',this.prova2);
             },
             chooseFiles() {
-                document.getElementById(this._uid).click()
+                //alert(this.fileUpload);
+                console.log('entra');
+                this.$refs.arxiu.click();
+                //document.getElementById(this.fileUpload).click();
             },
             borra() {
                 this.prova2='';
@@ -84,7 +87,6 @@
                 $(this.uuid).prop("disabled", false);
             },
             este() {
-
                 this.file = event.target.files || event.dataTransfer.files;
                 console.log(this.file);
                 console.log(event.target.files);
@@ -162,7 +164,7 @@
         },
         mounted () {
             $("#costat").hide();
-            this.fileUpload = this._uid
+            this.fileUpload = this._uid;
         },
         watch: {
             prova2(newValue ,oldValue){

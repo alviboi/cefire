@@ -3270,7 +3270,7 @@ $(function () {
       file: null,
       link_dia: null,
       titul: '',
-      fileUpload: null,
+      fileUpload: 0,
       uuid: null
     };
   },
@@ -3292,7 +3292,9 @@ $(function () {
 
     },
     chooseFiles: function chooseFiles() {
-      document.getElementById(this._uid).click();
+      //alert(this.fileUpload);
+      console.log('entra');
+      this.$refs.arxiu.click(); //document.getElementById(this.fileUpload).click();
     },
     borra: function borra() {
       this.prova2 = '';
@@ -44349,8 +44351,6 @@ var render = function() {
         _c("datepicker", {
           attrs: {
             "bootstrap-styling": true,
-            wrapperClass: _vm.shadow - _vm.lg,
-            "input-class": _vm.shadow - _vm.lg,
             language: _vm.es,
             "monday-first": true,
             inline: true
@@ -45457,6 +45457,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("input", {
+          ref: "arxiu",
           attrs: {
             name: "arxiu_pujar",
             id: _vm.fileUpload,
@@ -45481,7 +45482,7 @@ var render = function() {
             },
             on: {
               click: function($event) {
-                return _vm.chooseFiles()
+                return _vm.chooseFiles($event)
               }
             }
           },
@@ -47845,6 +47846,17 @@ var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./n
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-unique-id/dist/vue-unique-id.esm.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vue-unique-id/dist/vue-unique-id.esm.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/var/www/node_modules/vue-unique-id/dist/vue-unique-id.esm.js'");
 
 /***/ }),
 
@@ -62371,13 +62383,15 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
 /* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_unique_id__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-unique-id */ "./node_modules/vue-unique-id/dist/vue-unique-id.esm.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./extra */ "./resources/js/extra.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -62397,6 +62411,7 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_0__["default"], {
   newestOnTop: true
 });
 Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(vue_unique_id__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new Vue({
   el: '#app'
 });

@@ -5,6 +5,7 @@ window.Vue = require('vue');
 
 import Toast from "vue-toastification";
 import VueSimpleAlert from "vue-simple-alert";
+import UniqueId from 'vue-unique-id';
 
 import "vue-toastification/dist/index.css";
 
@@ -25,6 +26,8 @@ Vue.use(Toast, {
     newestOnTop: true
   });
 Vue.use(VueSimpleAlert);
+Vue.use(UniqueId);
+
 const app = new Vue({
     el: '#app',
 });

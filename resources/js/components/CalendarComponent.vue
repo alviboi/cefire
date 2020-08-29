@@ -3,7 +3,7 @@
 
 
         <div class="col-lg-3 col-md-3">
-            <datepicker :bootstrap-styling="true" :wrapperClass="shadow-lg" :input-class="shadow-lg" :language="es" :monday-first="true" :inline="true" v-model="fecha"></datepicker>
+            <datepicker :bootstrap-styling="true" :language="es" :monday-first="true" :inline="true" v-model="fecha"></datepicker>
              <!-- {{fechas}} -->
              <estadisticas-component :setmana="sem" :any="any"></estadisticas-component>
         </div>
