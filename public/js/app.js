@@ -47849,17 +47849,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-unique-id/dist/vue-unique-id.esm.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/vue-unique-id/dist/vue-unique-id.esm.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/var/www/node_modules/vue-unique-id/dist/vue-unique-id.esm.js'");
-
-/***/ }),
-
 /***/ "./node_modules/vue/dist/vue.common.dev.js":
 /*!*************************************************!*\
   !*** ./node_modules/vue/dist/vue.common.dev.js ***!
@@ -62383,15 +62372,13 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
 /* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
-/* harmony import */ var vue_unique_id__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-unique-id */ "./node_modules/vue-unique-id/dist/vue-unique-id.esm.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_2__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./extra */ "./resources/js/extra.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
 
 
 
@@ -62411,7 +62398,6 @@ Vue.use(vue_toastification__WEBPACK_IMPORTED_MODULE_0__["default"], {
   newestOnTop: true
 });
 Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__["default"]);
-Vue.use(vue_unique_id__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new Vue({
   el: '#app'
 });
