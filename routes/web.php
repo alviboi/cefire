@@ -71,4 +71,7 @@ Route::get('permisos_tots_concret/{id}/','PermisosController@torna_concret');
 
 Route::get('estadistica/{any}/{setmana}','EstadisticasController@estadisticas');
 
+Route::resource('centres', 'CentresController');
+
+
 

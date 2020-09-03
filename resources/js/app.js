@@ -18,6 +18,8 @@ Vue.component('permisos-component', require('./components/PermisosComponent.vue'
 Vue.component('permisos-component-tots', require('./components/PermisosComponentTots.vue').default);
 Vue.component('controlusuaris-component', require('./components/ControlusuarisComponent.vue').default);
 Vue.component('estadisticas-component', require('./components/EstadisticasComponent.vue').default);
+Vue.component('centres-component', require('./components/CentresComponent.vue').default);
+
 
 Vue.use(Toast, {
     transition: "Vue-Toastification__bounce",

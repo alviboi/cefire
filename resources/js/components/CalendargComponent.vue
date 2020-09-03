@@ -252,7 +252,7 @@ export default {
                 set+1,
                 Math.floor(index / 2 + 1) +
                   (7 * (set) - this.primer_dia + 1),
-                this.arr['Nid_Asesor']
+                this.arr[14]
               );
             }
           }
@@ -397,7 +397,7 @@ export default {
     border: solid 1px green;
 }
 .compensa {
-    border: solid 1px yellow;
+    border: solid 1px rgb(77, 47, 3);
 }
 
 .wrapper {
@@ -652,7 +652,7 @@ sidebar {
   .compensa2 {
     padding: 1px;
     align-content: left;
-    color: yellow;
+    color: rgb(77, 47, 3);;
   }
 
 

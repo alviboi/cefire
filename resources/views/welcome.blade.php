@@ -11,4 +11,5 @@
     </div>
 </div>
 {{$exemple ?? ''}}
+<centres-component></centres-component>
 @endsection
