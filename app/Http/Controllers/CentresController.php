@@ -73,6 +73,14 @@ class CentresController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request2=$request->toArray();
+        $centre=Centres::where('id', $id)->first();
+        foreach ($request2 as $key => $value) {
+            # code...
+            $centre->{$key}=$value;
+        }
+        $centre->save();
+        return "Desat correctament";
     }
 
     /**

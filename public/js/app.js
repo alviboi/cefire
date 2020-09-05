@@ -3258,6 +3258,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3266,17 +3279,36 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    guarda_centre: function guarda_centre() {
+      var _this = this;
+
+      //alert(this.tots_centres[this.editant]['tlf_contacte']);
+      var url = "/centres/" + this.tots_centres[this.editant]['id'];
+      var params = JSON.stringify(this.tots_centres[this.editant]);
+      console.log(params);
+      axios.put(url, params, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        _this.$alert(res.data);
+      })["catch"](function (err) {
+        console.error(err);
+      }); //   $("#exampleModal").modal("close");
+    },
     edita: function edita(id) {
       $("#exampleModal").modal("show");
       this.editant = id;
+      var url = "http://www.ceice.gva.es/abc/i_guiadecentros/es/centro.asp?codi=" + this.tots_centres[this.editant]['codi'];
+      $("#centre-referencia").html("<a href='" + url + "' target='_blank' title='Vés a la guia de centres'>Informació centre</a>");
     },
     agafa_centres: function agafa_centres() {
-      var _this = this;
+      var _this2 = this;
 
       var url = "/centres";
       axios.get(url).then(function (res) {
-        _this.tots_centres = res.data;
-        console.log(_this.tots_centres);
+        _this2.tots_centres = res.data;
+        console.log(_this2.tots_centres);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -45387,8 +45419,12 @@ var render = function() {
     _c("p", [_vm._v("Busca en tota la taula:")]),
     _vm._v(" "),
     _c("input", {
-      staticClass: "form-control",
-      attrs: { id: "myInput", type: "text", placeholder: "Search.." }
+      staticClass: "form-control col-lg-12 col-md-12",
+      attrs: {
+        id: "myInput",
+        type: "text",
+        placeholder: "Busca en qualsevol camp.."
+      }
     }),
     _vm._v(" "),
     _c("br"),
@@ -45463,7 +45499,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(1),
@@ -45472,194 +45508,461 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "alert alert-danger",
+                    staticClass: "alert alert-success",
                     attrs: { role: "alert" }
                   },
                   [
                     _vm._v(
-                      "\nAquesta part encara no està feta. Per tant no és funcional."
+                      "\nAquesta part ja és totalment funcional i podeu utilitzar-la. Actualitzeu les dades de la base de dades."
                     )
                   ]
                 ),
                 _vm._v(" "),
                 _vm.tots_centres[_vm.editant]
-                  ? _c("form", [
-                      _c("div", { staticClass: "form-group" }, [
+                  ? _c("form", { staticClass: "container" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Centre:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["nom"],
+                              expression: "tots_centres[editant]['nom']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10",
                           attrs: { type: "text", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["nom"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "nom",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Codi:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", id: "recipient-name" },
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["codi"],
+                              expression: "tots_centres[editant]['codi']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
+                          attrs: { type: "number", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["codi"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "codi",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Situació:")]
                         ),
                         _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", id: "recipient-name" },
-                          domProps: {
-                            value: _vm.tots_centres[_vm.editant]["situacio"]
-                          }
-                        })
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.tots_centres[_vm.editant]["situacio"],
+                                expression: "tots_centres[editant]['situacio']"
+                              }
+                            ],
+                            staticClass: "form-control col-lg-10 col-md-10",
+                            attrs: { type: "text", id: "recipient-name" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.tots_centres[_vm.editant],
+                                  "situacio",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", [_vm._v("PUB.")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("CON.")])
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("CP:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", id: "recipient-name" },
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["CP"],
+                              expression: "tots_centres[editant]['CP']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
+                          attrs: { type: "number", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["CP"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "CP",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Ciutat:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["ciutat"],
+                              expression: "tots_centres[editant]['ciutat']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
                           attrs: { type: "text", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["ciutat"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "ciutat",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Assessoria:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["assesor"],
+                              expression: "tots_centres[editant]['assesor']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
                           attrs: { type: "text", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["assesor"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "assesor",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Contacte:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tots_centres[_vm.editant]["contacte"],
+                              expression: "tots_centres[editant]['contacte']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
                           attrs: { type: "text", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["contacte"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "contacte",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Mail contacte:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value:
+                                _vm.tots_centres[_vm.editant]["mail_contacte"],
+                              expression:
+                                "tots_centres[editant]['mail_contacte']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
                           attrs: { type: "text", id: "recipient-name" },
                           domProps: {
                             value:
                               _vm.tots_centres[_vm.editant]["mail_contacte"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "mail_contacte",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+                      _c("div", { staticClass: "form-group row" }, [
                         _c(
                           "label",
                           {
-                            staticClass: "col-form-label",
+                            staticClass: "col-form-label col-lg-2 col-md-2",
                             attrs: { for: "recipient-name" }
                           },
                           [_vm._v("Tlf contacte:")]
                         ),
                         _vm._v(" "),
                         _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", id: "recipient-name" },
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value:
+                                _vm.tots_centres[_vm.editant]["tlf_contacte"],
+                              expression:
+                                "tots_centres[editant]['tlf_contacte']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
+                          attrs: { type: "number", id: "recipient-name" },
                           domProps: {
                             value: _vm.tots_centres[_vm.editant]["tlf_contacte"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "tlf_contacte",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-form-label col-lg-2 col-md-2",
+                            attrs: { for: "recipient-name" }
+                          },
+                          [_vm._v("Observacions:")]
+                        ),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value:
+                                _vm.tots_centres[_vm.editant]["Observacions"],
+                              expression:
+                                "tots_centres[editant]['Observacions']"
+                            }
+                          ],
+                          staticClass: "form-control col-lg-10 col-md-10",
+                          attrs: {
+                            type: "text",
+                            rows: "2",
+                            id: "recipient-name"
+                          },
+                          domProps: {
+                            value: _vm.tots_centres[_vm.editant]["Observacions"]
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tots_centres[_vm.editant],
+                                "Observacions",
+                                $event.target.value
+                              )
+                            }
                           }
                         })
                       ])
                     ])
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "mt-3 h4 text-center",
+                  attrs: { id: "centre-referencia" }
+                })
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.guarda_centre }
+                  },
+                  [_vm._v("Guarda")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.guarda_centre }
+                  },
+                  [_vm._v("Guarda i tanca")]
+                )
+              ])
             ])
           ]
         )
@@ -45674,23 +45977,23 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("nom")]),
+        _c("th", [_vm._v("Nom")]),
         _vm._v(" "),
-        _c("th", [_vm._v("codi")]),
+        _c("th", [_vm._v("Codi")]),
         _vm._v(" "),
-        _c("th", [_vm._v("sit.")]),
+        _c("th", [_vm._v("Sit.")]),
         _vm._v(" "),
         _c("th", [_vm._v("CP")]),
         _vm._v(" "),
-        _c("th", [_vm._v("ciutat")]),
+        _c("th", [_vm._v("Ciutat")]),
         _vm._v(" "),
         _c("th", [_vm._v("Assessoria")]),
         _vm._v(" "),
-        _c("th", [_vm._v("contacte")]),
+        _c("th", [_vm._v("Contacte")]),
         _vm._v(" "),
-        _c("th", [_vm._v("mail")]),
+        _c("th", [_vm._v("Mail")]),
         _vm._v(" "),
-        _c("th", [_vm._v("tlf")])
+        _c("th", [_vm._v("Tlf")])
       ])
     ])
   },
@@ -45716,21 +46019,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Guarda(no funcional)")]
       )
     ])
   }
