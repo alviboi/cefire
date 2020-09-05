@@ -13,10 +13,11 @@
           </div>
           <div>
             <div>
+             <input type="checkbox" id="cefire" v-model="check_cefire"><label class='cefire2' for="cefire">CEFIRE</label>
               <input type="checkbox" id="guardia" v-model="check_guardia"><label class='guardia2' for="guardia">Guàrdia</label>
               <input type="checkbox" id="eixida" v-model="check_eixida"><label class='eixida2' for="eixida">Eixida</label>
               <input type="checkbox" id="curs" v-model="check_curs"><label  class='curs2' for="curs">Curs</label>
-            <input type="checkbox" id="compensa" v-model="check_compensa"><label  class='compensa2' for="compensa">Compensa</label>
+              <input type="checkbox" id="compensa" v-model="check_compensa"><label  class='compensa2' for="compensa">Compensa</label>
 
             </div>
           </div>
@@ -38,8 +39,8 @@
             <div class="calendar__week">
               <div
                 style="overflow-y:auto;"
-                v-for="item in 7"
-                :key="item.id"
+                v-for="(item,index) in 7"
+                :key="index"
                 class="calendar__day"
                 :id="'s'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)"
               >
@@ -51,6 +52,7 @@
                 <div class="eixida2"></div>
                 <div class="curs2"></div>
                 <div class="compensa2"></div>
+                <div class="cefire2"></div>
               </div>
             </div>
           </div>
@@ -113,6 +115,7 @@ export default {
       check_guardia: false,
       check_curs: false,
       check_compensa: false,
+      check_cefire: false,
       dia: null,
       mes: null,
       any: null,
@@ -163,9 +166,14 @@ export default {
         this.check_curs=false;
         this.check_guardia=false;
         this.check_compensa=false;
+        this.check_cefire=false;
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+    },
+    posa_cefire(a, b, nombre) {
+      var str = "<div style='font-size:10px;' class='concepte cefire'>" + nombre + "</div>";
+      $("#s" + a + "d" + b +' .cefire2').append(str);
     },
     posa_compensa(a, b, nombre) {
       var str = "<div style='font-size:10px;' class='concepte compensa'>" + nombre + "</div>";
@@ -298,7 +306,7 @@ export default {
             }
             //this.posa_guardia(1,1,'aaa');
           }
-        });console.log(this.guardies);
+        });
 
       }
     },
@@ -338,7 +346,47 @@ export default {
             }
             //this.posa_guardia(1,1,'aaa');
           }
-        });console.log(this.guardies);
+        });
+
+      }
+    },
+
+
+///////////////cefire////////////////////////////77
+    async agafa_datos_cefire() {
+      //alert(this.primer_dia);
+      for (let set = 0; set < this.setmanes + 1; set++) {
+        await axios
+          .get(
+            "/guardias/" +
+              (this.primer_dia_2.getWeek() + (set)) +
+              "/" +
+              this.avui.getFullYear()
+          )
+          .then(response => (this.guardies = response.data))
+          .catch(function(error) {
+            console.log(error);
+          });
+
+               // console.log(this.guardies);
+        this.guardies.forEach(element => {
+          this.arr = Object.values(element);
+            console.log(this.arr);
+          for (let index = 0; index < 14; index++) {
+            if (
+              this.arr[index].includes("CEFIRE")
+            ) {
+              //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+              this.posa_cefire(
+                set+1,
+                Math.floor(index / 2 + 1) +
+                  (7 * (set) - this.primer_dia + 1),
+                this.arr[14]
+              );
+            }
+            //this.posa_guardia(1,1,'aaa');
+          }
+        });
 
       }
     }
@@ -378,6 +426,14 @@ export default {
           } else {
               $(".compensa").remove();
           }
+      },
+      check_cefire(newValue, oldValue) {
+
+          if (this.check_cefire){
+              this.agafa_datos_cefire();
+          } else {
+              $(".cefire").remove();
+          }
       }
   },
   mounted () {
@@ -399,6 +455,9 @@ export default {
 .compensa {
     border: solid 1px rgb(77, 47, 3);
 }
+.cefire {
+    border: solid 1px rgb(105, 7, 114);;
+  }
 
 .wrapper {
   display: grid;
@@ -653,6 +712,11 @@ sidebar {
     padding: 1px;
     align-content: left;
     color: rgb(77, 47, 3);;
+  }
+.cefire2 {
+    padding: 1px;
+    align-content: left;
+    color: rgb(105, 7, 114);;
   }
 
 

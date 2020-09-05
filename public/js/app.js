@@ -2730,6 +2730,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2742,6 +2744,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       check_guardia: false,
       check_curs: false,
       check_compensa: false,
+      check_cefire: false,
       dia: null,
       mes: null,
       any: null,
@@ -2782,9 +2785,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.check_curs = false;
       this.check_guardia = false;
       this.check_compensa = false;
+      this.check_cefire = false;
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
+    },
+    posa_cefire: function posa_cefire(a, b, nombre) {
+      var str = "<div style='font-size:10px;' class='concepte cefire'>" + nombre + "</div>";
+      $("#s" + a + "d" + b + ' .cefire2').append(str);
     },
     posa_compensa: function posa_compensa(a, b, nombre) {
       var str = "<div style='font-size:10px;' class='concepte compensa'>" + nombre + "</div>";
@@ -2970,9 +2978,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             }
                           });
 
-                          console.log(_this3.guardies);
-
-                        case 4:
+                        case 3:
                         case "end":
                           return _context5.stop();
                       }
@@ -3040,9 +3046,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             }
                           });
 
-                          console.log(_this4.guardies);
-
-                        case 4:
+                        case 3:
                         case "end":
                           return _context7.stop();
                       }
@@ -3070,6 +3074,74 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee4);
+      }))();
+    },
+    ///////////////cefire////////////////////////////77
+    agafa_datos_cefire: function agafa_datos_cefire() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var _loop5, set;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _loop5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _loop5(set) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _loop5$(_context9) {
+                    while (1) {
+                      switch (_context9.prev = _context9.next) {
+                        case 0:
+                          _context9.next = 2;
+                          return axios.get("/guardias/" + (_this5.primer_dia_2.getWeek() + set) + "/" + _this5.avui.getFullYear()).then(function (response) {
+                            return _this5.guardies = response.data;
+                          })["catch"](function (error) {
+                            console.log(error);
+                          });
+
+                        case 2:
+                          // console.log(this.guardies);
+                          _this5.guardies.forEach(function (element) {
+                            _this5.arr = Object.values(element);
+                            console.log(_this5.arr);
+
+                            for (var index = 0; index < 14; index++) {
+                              if (_this5.arr[index].includes("CEFIRE")) {
+                                //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+                                _this5.posa_cefire(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this5.primer_dia + 1), _this5.arr[14]);
+                              } //this.posa_guardia(1,1,'aaa');
+
+                            }
+                          });
+
+                        case 3:
+                        case "end":
+                          return _context9.stop();
+                      }
+                    }
+                  }, _loop5);
+                });
+                set = 0;
+
+              case 2:
+                if (!(set < _this5.setmanes + 1)) {
+                  _context10.next = 7;
+                  break;
+                }
+
+                return _context10.delegateYield(_loop5(set), "t0", 4);
+
+              case 4:
+                set++;
+                _context10.next = 2;
+                break;
+
+              case 7:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee5);
       }))();
     }
   },
@@ -3100,6 +3172,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.agafa_datos_compensa();
       } else {
         $(".compensa").remove();
+      }
+    },
+    check_cefire: function check_cefire(newValue, oldValue) {
+      if (this.check_cefire) {
+        this.agafa_datos_cefire();
+      } else {
+        $(".cefire").remove();
       }
     }
   },
@@ -8578,7 +8657,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".eixida[data-v-21dd05bf] {\n  border: solid 1px blue;\n}\n.guardia[data-v-21dd05bf] {\n  border: solid 1px red;\n}\n.curs[data-v-21dd05bf] {\n  border: solid 1px green;\n}\n.compensa[data-v-21dd05bf] {\n  border: solid 1px #4d2f03;\n}\n.wrapper[data-v-21dd05bf] {\n  display: grid;\n  grid-template-rows: 70px 1fr 70px;\n  grid-template-columns: 1fr;\n  grid-template-areas: \"content\";\n  width: 100vw;\n  height: 100vh;\n}\n@media screen and (min-width: 850px) {\n.wrapper[data-v-21dd05bf] {\n    grid-template-columns: 5fr;\n    grid-template-rows: 1fr;\n    grid-template-areas: \"content\";\n}\n}\nmain[data-v-21dd05bf] {\n  grid-area: content;\n  padding: 80px;\n}\nsidebar[data-v-21dd05bf] {\n  grid-area: sidebar;\n  display: grid;\n  grid-template-columns: 1fr 3fr 1fr;\n  grid-template-rows: 3fr 1fr;\n  grid-template-areas: \"logo menu avatar\" \"copyright menu avatar\";\n}\n.logo[data-v-21dd05bf] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.copyright[data-v-21dd05bf] {\n  text-align: center;\n}\n.avatar[data-v-21dd05bf] {\n  grid-area: avatar;\n  display: flex;\n  align-items: center;\n  flex-direction: row-reverse;\n}\n.avatar__name[data-v-21dd05bf] {\n  flex: 1;\n  text-align: right;\n  margin-right: 1em;\n}\n.avatar__img > img[data-v-21dd05bf] {\n  display: block;\n}\n.copyright[data-v-21dd05bf] {\n  grid-area: copyright;\n}\n.menu[data-v-21dd05bf] {\n  grid-area: menu;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.logo[data-v-21dd05bf] {\n  grid-area: logo;\n}\n.menu__text[data-v-21dd05bf] {\n  display: none;\n}\n@media screen and (min-width: 850px) {\nsidebar[data-v-21dd05bf] {\n    grid-template-areas: \"logo\" \"avatar\" \"menu\" \"copyright\";\n    grid-template-columns: 1fr;\n    grid-template-rows: 50px auto 1fr 50px;\n}\n.menu[data-v-21dd05bf] {\n    flex-direction: column;\n    align-items: normal;\n    justify-content: flex-start;\n}\n.menu__text[data-v-21dd05bf] {\n    display: inline-block;\n}\n.avatar[data-v-21dd05bf] {\n    flex-direction: column;\n}\n.avatar__name[data-v-21dd05bf] {\n    margin: 1em 0;\n}\n.avatar__img > img[data-v-21dd05bf] {\n    border-radius: 50%;\n}\n}\n.toolbar[data-v-21dd05bf] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 24px;\n}\n.calendar__week[data-v-21dd05bf],\n.calendar__header[data-v-21dd05bf] {\n  display: grid;\n  grid-template-columns: repeat(7, 1fr);\n}\n.calendar__week[data-v-21dd05bf] {\n  grid-auto-rows: 170px;\n  text-align: right;\n}\n.calendar__header[data-v-21dd05bf] {\n  grid-auto-rows: 50px;\n  align-items: center;\n  text-align: center;\n}\n\n/* COSMETIC STYLING */\n.copyright[data-v-21dd05bf] {\n  font-size: 0.7rem;\n  font-weight: 400;\n}\n.calendar[data-v-21dd05bf] {\n  background-color: white;\n  border: 1px solid #e1e1e1;\n}\n.calendar__header > div[data-v-21dd05bf] {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  font-weight: bold;\n}\n.calendar__day[data-v-21dd05bf] {\n  border-right: 1px solid #e1e1e1;\n  border-top: 1px solid #e1e1e1;\n  height: 150px;\n}\n.calendar__day .guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.calendar__day .eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.calendar__day .curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.compensa2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: #4d2f03;\n}", ""]);
+exports.push([module.i, ".eixida[data-v-21dd05bf] {\n  border: solid 1px blue;\n}\n.guardia[data-v-21dd05bf] {\n  border: solid 1px red;\n}\n.curs[data-v-21dd05bf] {\n  border: solid 1px green;\n}\n.compensa[data-v-21dd05bf] {\n  border: solid 1px #4d2f03;\n}\n.cefire[data-v-21dd05bf] {\n  border: solid 1px #690772;\n}\n.wrapper[data-v-21dd05bf] {\n  display: grid;\n  grid-template-rows: 70px 1fr 70px;\n  grid-template-columns: 1fr;\n  grid-template-areas: \"content\";\n  width: 100vw;\n  height: 100vh;\n}\n@media screen and (min-width: 850px) {\n.wrapper[data-v-21dd05bf] {\n    grid-template-columns: 5fr;\n    grid-template-rows: 1fr;\n    grid-template-areas: \"content\";\n}\n}\nmain[data-v-21dd05bf] {\n  grid-area: content;\n  padding: 80px;\n}\nsidebar[data-v-21dd05bf] {\n  grid-area: sidebar;\n  display: grid;\n  grid-template-columns: 1fr 3fr 1fr;\n  grid-template-rows: 3fr 1fr;\n  grid-template-areas: \"logo menu avatar\" \"copyright menu avatar\";\n}\n.logo[data-v-21dd05bf] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.copyright[data-v-21dd05bf] {\n  text-align: center;\n}\n.avatar[data-v-21dd05bf] {\n  grid-area: avatar;\n  display: flex;\n  align-items: center;\n  flex-direction: row-reverse;\n}\n.avatar__name[data-v-21dd05bf] {\n  flex: 1;\n  text-align: right;\n  margin-right: 1em;\n}\n.avatar__img > img[data-v-21dd05bf] {\n  display: block;\n}\n.copyright[data-v-21dd05bf] {\n  grid-area: copyright;\n}\n.menu[data-v-21dd05bf] {\n  grid-area: menu;\n  display: flex;\n  align-items: center;\n  justify-content: space-evenly;\n}\n.logo[data-v-21dd05bf] {\n  grid-area: logo;\n}\n.menu__text[data-v-21dd05bf] {\n  display: none;\n}\n@media screen and (min-width: 850px) {\nsidebar[data-v-21dd05bf] {\n    grid-template-areas: \"logo\" \"avatar\" \"menu\" \"copyright\";\n    grid-template-columns: 1fr;\n    grid-template-rows: 50px auto 1fr 50px;\n}\n.menu[data-v-21dd05bf] {\n    flex-direction: column;\n    align-items: normal;\n    justify-content: flex-start;\n}\n.menu__text[data-v-21dd05bf] {\n    display: inline-block;\n}\n.avatar[data-v-21dd05bf] {\n    flex-direction: column;\n}\n.avatar__name[data-v-21dd05bf] {\n    margin: 1em 0;\n}\n.avatar__img > img[data-v-21dd05bf] {\n    border-radius: 50%;\n}\n}\n.toolbar[data-v-21dd05bf] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 24px;\n}\n.calendar__week[data-v-21dd05bf],\n.calendar__header[data-v-21dd05bf] {\n  display: grid;\n  grid-template-columns: repeat(7, 1fr);\n}\n.calendar__week[data-v-21dd05bf] {\n  grid-auto-rows: 170px;\n  text-align: right;\n}\n.calendar__header[data-v-21dd05bf] {\n  grid-auto-rows: 50px;\n  align-items: center;\n  text-align: center;\n}\n\n/* COSMETIC STYLING */\n.copyright[data-v-21dd05bf] {\n  font-size: 0.7rem;\n  font-weight: 400;\n}\n.calendar[data-v-21dd05bf] {\n  background-color: white;\n  border: 1px solid #e1e1e1;\n}\n.calendar__header > div[data-v-21dd05bf] {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  font-weight: bold;\n}\n.calendar__day[data-v-21dd05bf] {\n  border-right: 1px solid #e1e1e1;\n  border-top: 1px solid #e1e1e1;\n  height: 150px;\n}\n.calendar__day .guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.calendar__day .eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.calendar__day .curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.guardia2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: red;\n}\n.eixida2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: blue;\n}\n.curs2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: green;\n}\n.compensa2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: #4d2f03;\n}\n.cefire2[data-v-21dd05bf] {\n  padding: 1px;\n  align-content: left;\n  color: #690772;\n}", ""]);
 
 // exports
 
@@ -45134,6 +45213,49 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
+                    value: _vm.check_cefire,
+                    expression: "check_cefire"
+                  }
+                ],
+                attrs: { type: "checkbox", id: "cefire" },
+                domProps: {
+                  checked: Array.isArray(_vm.check_cefire)
+                    ? _vm._i(_vm.check_cefire, null) > -1
+                    : _vm.check_cefire
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.check_cefire,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.check_cefire = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.check_cefire = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.check_cefire = $$c
+                    }
+                  }
+                }
+              }),
+              _c(
+                "label",
+                { staticClass: "cefire2", attrs: { for: "cefire" } },
+                [_vm._v("CEFIRE")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.check_guardia,
                     expression: "check_guardia"
                   }
@@ -45321,11 +45443,11 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "calendar__week" },
-                  _vm._l(7, function(item) {
+                  _vm._l(7, function(item, index) {
                     return _c(
                       "div",
                       {
-                        key: item.id,
+                        key: index,
                         staticClass: "calendar__day",
                         staticStyle: { "overflow-y": "auto" },
                         attrs: {
@@ -45355,7 +45477,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "curs2" }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "compensa2" })
+                        _c("div", { staticClass: "compensa2" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "cefire2" })
                       ]
                     )
                   }),
