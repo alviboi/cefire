@@ -5,6 +5,7 @@ window.Vue = require('vue');
 
 import Toast from "vue-toastification";
 import VueSimpleAlert from "vue-simple-alert";
+import jsPDF from "jspdf";
 
 import "vue-toastification/dist/index.css";
 
@@ -27,6 +28,7 @@ Vue.use(Toast, {
     newestOnTop: true
   });
 Vue.use(VueSimpleAlert);
+Vue.use(jsPDF);
 
 const app = new Vue({
     el: '#app',

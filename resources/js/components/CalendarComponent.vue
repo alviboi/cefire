@@ -78,7 +78,10 @@
                             <diacamp-component :prova2.sync='fechas["TxtTardeD"]' :setmana="sem" :any="any" dia="TxtTardeD"></diacamp-component>
                         </div>
                          <div class="col-lg-10 mt-5 text-right">
+                        <button type="button" class="btn btn-primary btn-lg" @click="generatePdf">PDF</button>
+
                         <button type="button" class="btn btn-primary btn-lg" @click="escribir_datos">Actualitza</button>
+
                         <!-- <button type="button" class="btn btn-primary btn-lg" @click="este">Notifica</button> -->
 
 
@@ -142,7 +145,9 @@
 
     import Datepicker from 'vuejs-datepicker';
     import {es, en, ca} from 'vuejs-datepicker/dist/locale';
-    import VueAxios from 'vue-axios'
+    import VueAxios from 'vue-axios';
+    import jsPDF from "jspdf";
+    import 'jspdf-autotable';
 
 
     export default {
@@ -192,6 +197,55 @@
             }
         },
         methods: {
+
+
+
+
+            generatePdf(){
+
+                var doc = new jsPDF('p', 'pt', 'A4');
+                //var doc = new jsPDF()
+                doc.addImage("/img/cefire-valencia-color.png", "PNG", 400, 40, 130, 50);
+                var nom = $("#navbarDropdown").text().trim();
+                doc.setFontSize(20);
+                doc.text(200,120, 'HORARI DEL CEFIRE');
+                doc.setFontSize(15);
+                doc.text(35,150, 'ANY: '+this.any);
+                doc.text(35,170, 'SETMANA DE L\'ANY: '+this.sem);
+                doc.text(35,190, 'ASSESOR: '+nom);
+                                doc.setFontSize(20);
+
+                var number;
+                doc.autoTable({
+                    startY: 230,
+                    head: [['Dia', 'Matí', 'Vesprada']],
+                    cellWidth: number = 50,
+                    columnStyles: { 0: {cellWidth: number = 100, fontStyle: 'bold', lineWidth: number = 1 },
+                    1: {fontStyle: 'bold', lineWidth: number = 1 },
+                    2: {fontStyle: 'bold', lineWidth: number = 1 } },
+                    body: [
+                        ['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtManyanaL']],
+                        ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtManyanaM']],
+                        ['Dimecres', this.fechas['TxtManyanaX'], this.fechas['TxtManyanaX']],
+                        ['Dijous', this.fechas['TxtManyanaJ'], this.fechas['TxtManyanaJ']],
+                        ['Divendres', this.fechas['TxtManyanaV'], this.fechas['TxtManyanaV']],
+                        ['Dissabte', this.fechas['TxtManyanaS'], this.fechas['TxtManyanaS']],
+                        ['Diumenge', this.fechas['TxtManyanaD'], this.fechas['TxtManyanaD']],
+                        // ...
+                    ],
+                });
+                doc.setFontSize(15);
+                var f = new Date();
+                  var locale = "ca-es";
+                doc.text(300,500,"En València a "+f.getDate() + " de " + f.toLocaleString(locale, { month: "long" }) + " de " + f.getFullYear());
+
+
+
+                //doc.text(35, 25, 'Paranyan loves jsPDF')
+                //doc.addImage(imgData, 'JPEG', 15, 40, 180, 160);
+
+                doc.save('horari_de_'+nom+'.pdf');
+                },
             //
             notifica(missatge) {
                 this.$toast.success(missatge, {
