@@ -83,7 +83,7 @@
       <div class="col-lg-4">
         <div class="flip-card">
           <div class="flip-card-inner">
-              <a href="http://128.0.0.238:8006/">
+              <a href="https://128.0.0.238:8006/">
             <div class="flip-card-front">
               <img src="img/proxmox.png" alt="Avatar" style="width:300px;height:200px;" />
             </div>
