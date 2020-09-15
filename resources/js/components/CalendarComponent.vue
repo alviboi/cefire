@@ -198,6 +198,16 @@
         },
         methods: {
 
+            getfecha_setmana(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+},
 
 
 
@@ -205,24 +215,27 @@
 
                 var doc = new jsPDF('p', 'pt', 'A4');
                 //var doc = new jsPDF()
-                doc.addImage("/img/cefire-valencia-color.png", "PNG", 400, 40, 130, 50);
+                doc.addImage("/img/cefire-valencia-color.png", "PNG", 400, 30, 130, 50);
                 var nom = $("#navbarDropdown").text().trim();
                 doc.setFontSize(20);
-                doc.text(200,120, 'HORARI DEL CEFIRE');
+                doc.text(200,140, 'HORARI DEL CEFIRE');
                 doc.setFontSize(15);
-                doc.text(35,150, 'ANY: '+this.any);
-                doc.text(35,170, 'SETMANA DE L\'ANY: '+this.sem);
-                doc.text(35,190, 'ASSESOR: '+nom);
+                doc.text(35,170, 'ANY: '+this.any);
+                var fech_set=this.getfecha_setmana(this.sem,this.any);
+                var fech_set2=new Date();
+                fech_set2.setDate(fech_set.getDate() + 7);
+            doc.text(35, 190, "SETMANA DE L'ANY: " + fech_set.getDate() + " de/d' "+ fech_set.toLocaleString("ca-es", { month: "long" }) + " al " + fech_set2.getDate() + " de/d' "+ fech_set2.toLocaleString("ca-es", { month: "long" }));
+                doc.text(35,210, 'ASSESOR: '+nom);
                                 doc.setFontSize(20);
 
                 var number;
                 doc.autoTable({
-                    startY: 230,
+                    startY: 250,
                     head: [['Dia', 'Matí', 'Vesprada']],
                     cellWidth: number = 50,
-                    columnStyles: { 0: {cellWidth: number = 100, fontStyle: 'bold', lineWidth: number = 1 },
-                    1: {fontStyle: 'bold', lineWidth: number = 1 },
-                    2: {fontStyle: 'bold', lineWidth: number = 1 } },
+                    columnStyles: { 0: {cellWidth: number = 100, valign: 'middle', fontStyle: 'bold', lineWidth: number = 1 },
+                    1: {cellWidth: number = 200, minCellHeight: number = 30, fontStyle: 'bold', lineWidth: number = 1 },
+                    2: {cellWidth: number = 200, minCellHeight: number = 30, fontStyle: 'bold', lineWidth: number = 1 } },
                     body: [
                         ['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtManyanaL']],
                         ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtManyanaM']],
@@ -237,7 +250,7 @@
                 doc.setFontSize(15);
                 var f = new Date();
                   var locale = "ca-es";
-                doc.text(300,500,"En València a "+f.getDate() + " de " + f.toLocaleString(locale, { month: "long" }) + " de " + f.getFullYear());
+                doc.text(300,530,"En València a "+f.getDate() + " de " + f.toLocaleString(locale, { month: "long" }) + " de " + f.getFullYear());
 
 
 

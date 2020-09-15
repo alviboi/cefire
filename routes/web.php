@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/controldecentres', function () {
+    return view('centres');
+});
+
 Route::get('/calendari', function () {
     return view('calendar');
 });

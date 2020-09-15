@@ -215,6 +215,7 @@ export default {
               this.arr[index].includes("Sali") ||
               this.arr[index].includes("EIXIDA") ||
               this.arr[index].includes("SALIDA") ||
+              this.arr[index].includes("VISITA") ||
               this.arr[index].includes("Salida") ||
               this.arr[index].includes("Eix")
             ) {

@@ -9,6 +9,8 @@ import jsPDF from "jspdf";
 
 import "vue-toastification/dist/index.css";
 
+Vue.component('bottons-component', require('./components/BottonsComponent.vue').default);
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('calendari-component', require('./components/CalendarComponent.vue').default);
 Vue.component('diacamp-component', require('./components/DiaComponent.vue').default);
@@ -20,6 +22,7 @@ Vue.component('permisos-component-tots', require('./components/PermisosComponent
 Vue.component('controlusuaris-component', require('./components/ControlusuarisComponent.vue').default);
 Vue.component('estadisticas-component', require('./components/EstadisticasComponent.vue').default);
 Vue.component('centres-component', require('./components/CentresComponent.vue').default);
+
 
 
 Vue.use(Toast, {
