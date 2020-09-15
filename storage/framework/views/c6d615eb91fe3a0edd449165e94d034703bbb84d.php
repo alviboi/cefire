@@ -9,6 +9,7 @@
             <a class="btn btn-primary btn-lg" href="<?php echo e(route('login')); ?>" role="button">Accedeix</a>
         </div>
     </div>
+    <?php echo e($exemple ?? ''); ?>
 
     <bottons-component></bottons-component>
 

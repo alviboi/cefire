@@ -19,7 +19,7 @@
             <a class="btn btn-primary btn-lg" href="{{ route('login') }}" role="button">Accedeix</a>
         </div>
     </div>
-
+    {{ $exemple ?? '' }}
     <bottons-component></bottons-component>
 
 
