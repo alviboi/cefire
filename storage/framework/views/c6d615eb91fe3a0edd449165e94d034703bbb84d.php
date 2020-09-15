@@ -11,7 +11,9 @@
     </div>
     <?php echo e($exemple ?? ''); ?>
 
-    <bottons-component></bottons-component>
+    <buttons-component>
+
+    </buttons-component>
 
 
 <?php $__env->stopSection(); ?>

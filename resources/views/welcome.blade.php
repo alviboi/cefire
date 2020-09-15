@@ -20,7 +20,9 @@
         </div>
     </div>
     {{ $exemple ?? '' }}
-    <bottons-component></bottons-component>
+    <buttons-component>
+
+    </buttons-component>
 
 
 @endsection

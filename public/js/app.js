@@ -66652,7 +66652,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.component('bottons-component', __webpack_require__(/*! ./components/BottonsComponent.vue */ "./resources/js/components/BottonsComponent.vue")["default"]);
+Vue.component('buttons-component', __webpack_require__(/*! ./components/BottonsComponent.vue */ "./resources/js/components/BottonsComponent.vue")["default"]);
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('calendari-component', __webpack_require__(/*! ./components/CalendarComponent.vue */ "./resources/js/components/CalendarComponent.vue")["default"]);
 Vue.component('diacamp-component', __webpack_require__(/*! ./components/DiaComponent.vue */ "./resources/js/components/DiaComponent.vue")["default"]);

@@ -9,7 +9,7 @@ import jsPDF from "jspdf";
 
 import "vue-toastification/dist/index.css";
 
-Vue.component('bottons-component', require('./components/BottonsComponent.vue').default);
+Vue.component('buttons-component', require('./components/BottonsComponent.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('calendari-component', require('./components/CalendarComponent.vue').default);
 Vue.component('diacamp-component', require('./components/DiaComponent.vue').default);
