@@ -237,13 +237,13 @@
                     1: {cellWidth: number = 200, minCellHeight: number = 30, fontStyle: 'bold', lineWidth: number = 1 },
                     2: {cellWidth: number = 200, minCellHeight: number = 30, fontStyle: 'bold', lineWidth: number = 1 } },
                     body: [
-                        ['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtManyanaL']],
-                        ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtManyanaM']],
-                        ['Dimecres', this.fechas['TxtManyanaX'], this.fechas['TxtManyanaX']],
-                        ['Dijous', this.fechas['TxtManyanaJ'], this.fechas['TxtManyanaJ']],
-                        ['Divendres', this.fechas['TxtManyanaV'], this.fechas['TxtManyanaV']],
-                        ['Dissabte', this.fechas['TxtManyanaS'], this.fechas['TxtManyanaS']],
-                        ['Diumenge', this.fechas['TxtManyanaD'], this.fechas['TxtManyanaD']],
+                        ['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtTardeL']],
+                        ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtTardeM']],
+                        ['Dimecres', this.fechas['TxtManyanaX'], this.fechas['TxtTardeX']],
+                        ['Dijous', this.fechas['TxtManyanaJ'], this.fechas['TxtTardeJ']],
+                        ['Divendres', this.fechas['TxtManyanaV'], this.fechas['TxtTardeV']],
+                        ['Dissabte', this.fechas['TxtManyanaS'], this.fechas['TxtTardeS']],
+                        ['Diumenge', this.fechas['TxtManyanaD'], this.fechas['TxtTardeD']],
                         // ...
                     ],
                 });

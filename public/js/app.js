@@ -2825,7 +2825,7 @@ __webpack_require__.r(__webpack_exports__);
             lineWidth: number = 1
           }
         },
-        body: [['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtManyanaL']], ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtManyanaM']], ['Dimecres', this.fechas['TxtManyanaX'], this.fechas['TxtManyanaX']], ['Dijous', this.fechas['TxtManyanaJ'], this.fechas['TxtManyanaJ']], ['Divendres', this.fechas['TxtManyanaV'], this.fechas['TxtManyanaV']], ['Dissabte', this.fechas['TxtManyanaS'], this.fechas['TxtManyanaS']], ['Diumenge', this.fechas['TxtManyanaD'], this.fechas['TxtManyanaD']] // ...
+        body: [['Dilluns', this.fechas['TxtManyanaL'], this.fechas['TxtTardeL']], ['Dimarts', this.fechas['TxtManyanaM'], this.fechas['TxtTardeM']], ['Dimecres', this.fechas['TxtManyanaX'], this.fechas['TxtTardeX']], ['Dijous', this.fechas['TxtManyanaJ'], this.fechas['TxtTardeJ']], ['Divendres', this.fechas['TxtManyanaV'], this.fechas['TxtTardeV']], ['Dissabte', this.fechas['TxtManyanaS'], this.fechas['TxtTardeS']], ['Diumenge', this.fechas['TxtManyanaD'], this.fechas['TxtTardeD']] // ...
         ]
       });
       doc.setFontSize(15);
@@ -47877,7 +47877,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-lg-4" }, [
           _c("div", { staticClass: "flip-card" }, [
             _c("div", { staticClass: "flip-card-inner" }, [
-              _c("a", { attrs: { href: "http://128.0.0.238:8006/" } }, [
+              _c("a", { attrs: { href: "https://128.0.0.238:8006/" } }, [
                 _c("div", { staticClass: "flip-card-front" }, [
                   _c("img", {
                     staticStyle: { width: "300px", height: "200px" },

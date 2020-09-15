@@ -3,6 +3,7 @@ require('./extra');
 
 window.Vue = require('vue');
 
+
 import Toast from "vue-toastification";
 import VueSimpleAlert from "vue-simple-alert";
 import jsPDF from "jspdf";
@@ -21,7 +22,6 @@ Vue.component('permisos-component-tots', require('./components/PermisosComponent
 Vue.component('controlusuaris-component', require('./components/ControlusuarisComponent.vue').default);
 Vue.component('estadisticas-component', require('./components/EstadisticasComponent.vue').default);
 Vue.component('centres-component', require('./components/CentresComponent.vue').default);
-
 
 
 Vue.use(Toast, {
