@@ -3349,8 +3349,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                             for (var index = 0; index < 14; index++) {
                               if (_this4.arr[index].includes("COMPENSA")) {
-                                //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
-                                _this4.posa_compensa(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this4.primer_dia + 1), _this4.arr[14]);
+                                var start_compensa = _this4.arr[index].indexOf("COMPENSA");
+
+                                var str_compensa = _this4.arr[index].slice(start_compensa + 8, 20); //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
+
+
+                                _this4.posa_compensa(set + 1, Math.floor(index / 2 + 1) + (7 * set - _this4.primer_dia + 1), _this4.arr[14].concat(str_compensa));
                               } //this.posa_guardia(1,1,'aaa');
 
                             }
