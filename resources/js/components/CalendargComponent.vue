@@ -338,14 +338,15 @@ export default {
               this.arr[index].includes("COMPENSA")
             ) {
               var start_compensa=this.arr[index].indexOf("COMPENSA");
-              var str_compensa=this.arr[index].slice(start_compensa+8, 20);
+              var end_compensa=this.arr[index].indexOf(")",start_compensa);
+              var str_compensa=this.arr[index].slice(start_compensa, end_compensa+1);
 
               //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
               this.posa_compensa(
                 set+1,
                 Math.floor(index / 2 + 1) +
                   (7 * (set) - this.primer_dia + 1),
-                this.arr[14].concat(str_compensa)
+                this.arr[14].concat(": <b>",str_compensa,"</b>")
               );
             }
             //this.posa_guardia(1,1,'aaa');
