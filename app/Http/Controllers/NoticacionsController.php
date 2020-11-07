@@ -15,8 +15,8 @@ class NoticacionsController extends Controller
     public function index()
     {
         //
-        $torna=Notificacions::get()->where('NidAsesor',auth()->user()->Nid_Asesor)->where('llegit',0)->toArray();
-        return $torna;
+        $torna=Notificacions::get()->where('NidAsesor',auth()->user()->Nid_Asesor)->where('llegit',0);
+        return $torna->toJson();
     }
 
     /**

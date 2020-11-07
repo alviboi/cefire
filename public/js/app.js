@@ -2585,10 +2585,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_5__);
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2886,7 +2932,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 self = _this;
                 _context.next = 3;
-                return axios.post('/notificacions').then(function (res) {
+                return axios.post("/notificacions").then(function (res) {
                   console.log(res);
                   self.notifica(res.data);
                 })["catch"](function (err) {
@@ -2905,7 +2951,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     aviso: function aviso(missatge) {
       this.$notify({
         group: "foo",
-        type: 'warn',
+        type: "warn",
         title: "Avisos de la directora",
         text: missatge,
         duration: 10000
@@ -2915,12 +2961,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _i, _Object$entries, _Object$entries$_i, key, value;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('/notificacions').then(function (res) {
+                return axios.get("/notificacions").then(function (res) {
                   console.log(res.data);
                   _this2.rebut = res.data;
                 })["catch"](function (err) {
@@ -2928,9 +2976,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                _this2.rebut.forEach(function (element) {
-                  _this2.aviso(element['missatge']);
-                });
+                for (_i = 0, _Object$entries = Object.entries(_this2.rebut); _i < _Object$entries.length; _i++) {
+                  _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+
+                  _this2.aviso(value['missatge']);
+                } // this.aviso(this.rebut[16]['missatge']);
+                // this.rebut.forEach(element => {
+                //     this.aviso(element['missatge']);
+                // });
+
 
               case 3:
               case "end":
@@ -9453,7 +9507,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".my-style {\n  padding: 10px;\n  margin: 0 5px 5px;\n  font-size: 18px;\n  color: #ffffff;\n  background: #44A4FC;\n  border-left: 5px solid #187FE7;\n}\n.my-style.warn {\n  background: #ffb648;\n  border-left-color: #f48a06;\n}\n.my-style.error {\n  background: #E54D42;\n  border-left-color: #B82E24;\n}\n.my-style.success {\n  background: #68CD86;\n  border-left-color: #42A85F;\n}", ""]);
+exports.push([module.i, ".my-style {\n  padding: 10px;\n  margin: 0 5px 5px;\n  font-size: 18px;\n  color: #ffffff;\n  background: #44a4fc;\n  border-left: 5px solid #187fe7;\n}\n.my-style.warn {\n  background: #ffb648;\n  border-left-color: #f48a06;\n}\n.my-style.error {\n  background: #e54d42;\n  border-left-color: #b82e24;\n}\n.my-style.success {\n  background: #68cd86;\n  border-left-color: #42a85f;\n}", ""]);
 
 // exports
 

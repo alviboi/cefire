@@ -1,6 +1,12 @@
 <template>
   <div class="row">
-    <notifications @click.native="llegit" classes="my-style" position="bottom center" width="80%" group="foo" />
+    <notifications
+      @click.native="llegit"
+      classes="my-style"
+      position="bottom center"
+      width="80%"
+      group="foo"
+    />
 
     <div class="col-lg-3 col-md-3">
       <datepicker
@@ -19,7 +25,9 @@
     <div class="col-lg-9 col-md-9">
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaL"><h4>Dilluns Matí {{dies[0]}}</h4></label>
+          <label for="TxtManyanaL"
+            ><h4>Dilluns Matí {{ dies[0] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaL"
             :prova2.sync="fechas['TxtManyanaL']"
@@ -29,7 +37,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeL"><h4>Dilluns Vesprada {{dies[0]}}</h4></label>
+          <label for="TxtTardeL"
+            ><h4>Dilluns Vesprada {{ dies[0] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeL']"
             :setmana="sem"
@@ -40,7 +50,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaM"><h4>Dimarts Matí {{dies[1]}}</h4></label>
+          <label for="TxtManyanaM"
+            ><h4>Dimarts Matí {{ dies[1] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaM"
             :prova2.sync="fechas['TxtManyanaM']"
@@ -50,7 +62,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeM"><h4>Dimarts Vesprada {{dies[1]}}</h4></label>
+          <label for="TxtTardeM"
+            ><h4>Dimarts Vesprada {{ dies[1] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeM']"
             :setmana="sem"
@@ -61,7 +75,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaX"><h4>Dimecres Matí {{dies[2]}}</h4></label>
+          <label for="TxtManyanaX"
+            ><h4>Dimecres Matí {{ dies[2] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaX"
             :prova2.sync="fechas['TxtManyanaX']"
@@ -71,7 +87,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeX"><h4>Dimecres Vesprada {{dies[2]}}</h4></label>
+          <label for="TxtTardeX"
+            ><h4>Dimecres Vesprada {{ dies[2] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeX']"
             :setmana="sem"
@@ -82,7 +100,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaJ"><h4>Dijous Matí {{dies[3]}}</h4></label>
+          <label for="TxtManyanaJ"
+            ><h4>Dijous Matí {{ dies[3] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaJ"
             :prova2.sync="fechas['TxtManyanaJ']"
@@ -92,7 +112,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeJ"><h4>Dijous Vesprada {{dies[3]}}</h4></label>
+          <label for="TxtTardeJ"
+            ><h4>Dijous Vesprada {{ dies[3] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeJ']"
             :setmana="sem"
@@ -103,7 +125,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaV"><h4>Divendres Matí {{dies[4]}}</h4></label>
+          <label for="TxtManyanaV"
+            ><h4>Divendres Matí {{ dies[4] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaV"
             :prova2.sync="fechas['TxtManyanaV']"
@@ -113,7 +137,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeV"><h4>Divendres Vesprada {{dies[4]}}</h4></label>
+          <label for="TxtTardeV"
+            ><h4>Divendres Vesprada {{ dies[4] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeV']"
             :setmana="sem"
@@ -124,7 +150,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaS"><h4>Dissabte Matí {{dies[5]}}</h4></label>
+          <label for="TxtManyanaS"
+            ><h4>Dissabte Matí {{ dies[5] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaS"
             :prova2.sync="fechas['TxtManyanaS']"
@@ -134,7 +162,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeS"><h4>Dissabte Vesprada {{dies[5]}}</h4></label>
+          <label for="TxtTardeS"
+            ><h4>Dissabte Vesprada {{ dies[5] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeS']"
             :setmana="sem"
@@ -145,7 +175,9 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtManyanaS"><h4>Diumenge Matí {{dies[6]}}</h4></label>
+          <label for="TxtManyanaS"
+            ><h4>Diumenge Matí {{ dies[6] }}</h4></label
+          >
           <diacamp-component
             id="TxtManyanaS"
             :prova2.sync="fechas['TxtManyanaD']"
@@ -155,7 +187,9 @@
           ></diacamp-component>
         </div>
         <div class="col-lg-6 col-md-6 pb-2">
-          <label for="TxtTardeD"><h4>Diumenge Vesprada {{dies[6]}}</h4></label>
+          <label for="TxtTardeD"
+            ><h4>Diumenge Vesprada {{ dies[6] }}</h4></label
+          >
           <diacamp-component
             :prova2.sync="fechas['TxtTardeD']"
             :setmana="sem"
@@ -287,40 +321,49 @@ export default {
     };
   },
   methods: {
-    async llegit(){
-        self=this;
-        await axios.post('/notificacions')
-        .then(res => {
-            console.log(res);
-            self.notifica(res.data);
+    async llegit() {
+      self = this;
+      await axios
+        .post("/notificacions")
+        .then((res) => {
+          console.log(res);
+          self.notifica(res.data);
         })
-        .catch(err => {
-            console.error(err);
-            self.notifica(element[err.data]);
-        })
+        .catch((err) => {
+          console.error(err);
+          self.notifica(element[err.data]);
+        });
     },
     aviso(missatge) {
       this.$notify({
         group: "foo",
-        type: 'warn',
+        type: "warn",
         title: "Avisos de la directora",
         text: missatge,
         duration: 10000,
       });
     },
-    async llig_avisos(){
-
-        await axios.get('/notificacions')
-        .then(res => {
-            console.log(res.data);
-            this.rebut=res.data;
+    async llig_avisos() {
+      await axios
+        .get("/notificacions")
+        .then((res) => {
+          console.log(res.data);
+          this.rebut = res.data;
         })
-        .catch(err => {
-            console.error(err);
+        .catch((err) => {
+          console.error(err);
         });
-        this.rebut.forEach(element => {
-            this.aviso(element['missatge']);
-        });
+
+
+
+      for (const [key, value] of Object.entries(this.rebut)) {
+            this.aviso(value['missatge']);
+      }
+
+      // this.aviso(this.rebut[16]['missatge']);
+      // this.rebut.forEach(element => {
+      //     this.aviso(element['missatge']);
+      // });
     },
     getfecha_setmana(w, y) {
       var simple = new Date(y, 0, 1 + (w - 1) * 7);
@@ -460,14 +503,12 @@ export default {
       //console.log(this.fechas);
     },
     dates_cal() {
-        for (let index = 0; index < 7; index++) {
-            let a=new Date();
+      for (let index = 0; index < 7; index++) {
+        let a = new Date();
 
-            a.setDate(this.fech_set_cal.getDate()+index);
+        a.setDate(this.fech_set_cal.getDate() + index);
 
-            this.dies[index]=a.getDate();
-
-
+        this.dies[index] = a.getDate();
       }
     },
     escribir_datos() {
@@ -491,9 +532,11 @@ export default {
     this.leer_datos(this.any, this.sem);
     this.llig_avisos();
 
-    this.fech_set_cal=this.getfecha_setmana(this.fecha.getWeek(),this.fecha.getFullYear());
+    this.fech_set_cal = this.getfecha_setmana(
+      this.fecha.getWeek(),
+      this.fecha.getFullYear()
+    );
     this.dates_cal();
-
   },
   components: {
     Datepicker,
@@ -505,7 +548,10 @@ export default {
       this.fechas["NidSemana"] = this.sem;
       this.fechas["NidAnyo"] = this.any;
       this.leer_datos(this.any, this.sem);
-      this.fech_set_cal=this.getfecha_setmana(this.fecha.getWeek(),this.fecha.getFullYear());
+      this.fech_set_cal = this.getfecha_setmana(
+        this.fecha.getWeek(),
+        this.fecha.getFullYear()
+      );
       this.dates_cal();
     },
 
@@ -519,7 +565,6 @@ export default {
 };
 </script>
 <style lang="scss">
-
 .my-style {
   padding: 10px;
   margin: 0 5px 5px;
@@ -527,8 +572,8 @@ export default {
   font-size: 18px;
 
   color: #ffffff;
-  background: #44A4FC;
-  border-left: 5px solid #187FE7;
+  background: #44a4fc;
+  border-left: 5px solid #187fe7;
 
   &.warn {
     background: #ffb648;
@@ -536,13 +581,13 @@ export default {
   }
 
   &.error {
-    background: #E54D42;
-    border-left-color: #B82E24;
+    background: #e54d42;
+    border-left-color: #b82e24;
   }
 
   &.success {
-    background: #68CD86;
-    border-left-color: #42A85F;
+    background: #68cd86;
+    border-left-color: #42a85f;
   }
 }
 </style>
