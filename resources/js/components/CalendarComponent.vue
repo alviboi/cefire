@@ -180,14 +180,6 @@
             Actualitza
           </button>
 
-          <button
-            type="button"
-            class="btn btn-primary btn-lg"
-            @click="llig_avisos"
-          >
-            Prova
-          </button>
-
           <!-- <button type="button" class="btn btn-primary btn-lg" @click="este">Notifica</button> -->
         </div>
       </div>

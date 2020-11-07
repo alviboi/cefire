@@ -2821,14 +2821,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -48869,16 +48861,6 @@ var render = function() {
                 on: { click: _vm.escribir_datos }
               },
               [_vm._v("\n          Actualitza\n        ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-lg",
-                attrs: { type: "button" },
-                on: { click: _vm.llig_avisos }
-              },
-              [_vm._v("\n          Prova\n        ")]
             )
           ])
         ])
