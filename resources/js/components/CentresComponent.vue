@@ -75,8 +75,6 @@
         </button>
       </div>
       <div class="modal-body">
-          <div class="alert alert-success" role="alert">
-Aquesta part ja és totalment funcional i podeu utilitzar-la. Actualitzeu les dades de la base de dades.</div>
         <form class="container" v-if="tots_centres[editant]">
           <div class="form-group row">
             <label for="recipient-name" class="col-form-label col-lg-2 col-md-2">Centre:</label>

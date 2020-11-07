@@ -72,7 +72,6 @@ class UserController extends Controller
     public function borra_perfil (Request $request)
     {
         //
-
         User::destroy($request->id);
 
         return "Perfil borrat";

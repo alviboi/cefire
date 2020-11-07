@@ -45,6 +45,8 @@ Route::resource('/horario', 'HorarioController')->middleware('auth');
 
 Route::get('horario/{semana}/{anyo}/','HorarioController@get_hora_anyo')->name('horariofechaid')->middleware('auth');
 
+Route::get('horario/{semana}/{anyo}/{id}/','HorarioController@get_hora_anyo_concret')->name('horariofechaid_concret')->middleware('auth');
+
 Route::get('guardias/{semana}/{anyo}/','HorarioController@get_todas_guardias')->name('guardias')->middleware('auth');
 
 Route::get('userdatos/','UserController@datos')->name('datosuser');
@@ -76,6 +78,10 @@ Route::get('permisos_tots_concret/{id}/','PermisosController@torna_concret');
 Route::get('estadistica/{any}/{setmana}','EstadisticasController@estadisticas');
 
 Route::resource('centres', 'CentresController');
+
+Route::resource('notificacions', 'NoticacionsController');
+
+Route::post('afg_advertencia/','HorarioController@afg_advertencia')->name('afg_advertencia')->middleware('auth');
 
 
 

@@ -4,25 +4,52 @@
       <main>
         <div class="toolbar">
           <div class="btn-group" role="group" aria-label="button group">
-            <button @click="canvia_mes(-1)" type="button" class="btn btn-secondary btn-lg">
+            <button
+              @click="canvia_mes(-1)"
+              type="button"
+              class="btn btn-secondary btn-lg"
+            >
               <i class="fas fa-arrow-circle-left"></i>
             </button>
-            <button @click="canvia_mes(1)" type="button" class="btn btn-secondary btn-lg">
+            <button
+              @click="canvia_mes(1)"
+              type="button"
+              class="btn btn-secondary btn-lg"
+            >
               <i class="fas fa-arrow-circle-right"></i>
             </button>
           </div>
           <div>
             <div>
-             <input type="checkbox" id="cefire" v-model="check_cefire"><label class='cefire2' for="cefire">CEFIRE</label>
-              <input type="checkbox" id="guardia" v-model="check_guardia"><label class='guardia2' for="guardia">Guàrdia</label>
-              <input type="checkbox" id="eixida" v-model="check_eixida"><label class='eixida2' for="eixida">Eixida</label>
-              <input type="checkbox" id="curs" v-model="check_curs"><label  class='curs2' for="curs">Curs</label>
-              <input type="checkbox" id="compensa" v-model="check_compensa"><label  class='compensa2' for="compensa">Compensa</label>
-
+              <input type="checkbox" id="cefire" v-model="check_cefire" /><label
+                class="cefire2"
+                for="cefire"
+                >CEFIRE</label
+              >
+              <input
+                type="checkbox"
+                id="guardia"
+                v-model="check_guardia"
+              /><label class="guardia2" for="guardia">Guàrdia</label>
+              <input type="checkbox" id="eixida" v-model="check_eixida" /><label
+                class="eixida2"
+                for="eixida"
+                >Eixida</label
+              >
+              <input type="checkbox" id="curs" v-model="check_curs" /><label
+                class="curs2"
+                for="curs"
+                >Curs</label
+              >
+              <input
+                type="checkbox"
+                id="compensa"
+                v-model="check_compensa"
+              /><label class="compensa2" for="compensa">Compensa</label>
             </div>
           </div>
           <div class="current-month">
-            <h2>{{meses_del_anyo[mes]}} {{any}}</h2>
+            <h2>{{ meses_del_anyo[mes] }} {{ any }}</h2>
           </div>
         </div>
         <div class="calendar">
@@ -38,21 +65,47 @@
           <div v-for="item2 in this.setmanes" :key="item2.id">
             <div class="calendar__week">
               <div
-                style="overflow-y:auto;"
-                v-for="(item,index) in 7"
+                style="overflow-y: auto"
+                v-for="(item, index) in 7"
                 :key="index"
                 class="calendar__day"
-                :id="'s'+item2+'d'+((item+(item2-1)*7)-primer_dia+1)"
+                :id="
+                  's' + item2 + 'd' + (item + (item2 - 1) * 7 - primer_dia + 1)
+                "
               >
                 <div
-                  v-if="((item>=primer_dia) || item2>1) && ((item+(item2-1)*7)-primer_dia+1)<=dies_mes"
-                >{{ (item+(item2-1)*7)-primer_dia+1 }}</div>
-                <div v-else></div>
-                <div class="guardia2"></div>
-                <div class="eixida2"></div>
-                <div class="curs2"></div>
-                <div class="compensa2"></div>
-                <div class="cefire2"></div>
+                  v-if="
+                    (item >= primer_dia || item2 > 1) &&
+                    item + (item2 - 1) * 7 - primer_dia + 1 <= dies_mes
+                  "
+                >
+                  <div class="controls">
+                    <button
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="CEFIRE"
+                      @click="
+                        afegir_comentari(
+                          item + (item2 - 1) * 7 - primer_dia + 1,
+                          mes,
+                          any
+                        )
+                      "
+                      class="btn btn-warning btn-sm"
+                    >
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </button>
+                    <div>
+                      <h4>{{ item + (item2 - 1) * 7 - primer_dia + 1 }}</h4>
+                    </div>
+                  </div>
+                  <!-- <div v-else></div> -->
+                  <div class="guardia2"></div>
+                  <div class="eixida2"></div>
+                  <div class="curs2"></div>
+                  <div class="compensa2"></div>
+                  <div class="cefire2"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -99,14 +152,101 @@
         <div class="copyright">copyright &copy; 2018</div>
       </sidebar> -->
     </div>
+
+    <!-- MODAL -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edita centres</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-5">
+              <select v-model="seleccio" id="seleccio" @change="get_data_concret()">
+                <option value="tots">Tots</option>
+                <option
+                  v-for="item5 in assesors"
+                  :key="item5.id"
+                  :value="item5.Nid_Asesor"
+                >
+                  {{ item5.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <p>Text que te l'assessor en esta data MATÍ:</p>
+              <textarea v-model="select_assessor_mati" id="select_assessor_mati" rows="3" cols="80"></textarea>
+            </div>
+            <div>
+              <p>Text que te l'assessor en esta data VESPRADA:</p>
+              <textarea
+                v-model="select_assessor_vesprada"
+                id="select_assessor_vesprada"
+                rows="3"
+                cols="80"
+              ></textarea>
+            </div>
+            <hr />
+            <div>
+              <p>Adevertència que vols posar-li</p>
+              <textarea v-model="advertencia" id="advertencia_assessor" rows="3" cols="80"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              @click="envia_missatge"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Envia
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL -->
   </div>
 </template>
 
 <script>
+function dynamicSort(property) {
+  var sortOrder = 1;
+
+  if (property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
+  }
+
+  return function (a, b) {
+    if (sortOrder == -1) {
+      return b[property].localeCompare(a[property]);
+    } else {
+      return a[property].localeCompare(b[property]);
+    }
+  };
+}
+
 export default {
   data() {
     return {
       avui: new Date(),
+      assesors: [],
       guardies: null,
       arr: [7][7],
       guardia: [],
@@ -124,6 +264,16 @@ export default {
       setmanes: null,
       dies_mes: null,
       dies_mes2: null,
+      dia_edt: null,
+      mes_edt: null,
+      fetxa_edita: new Date(),
+      editant: "",
+      id_editant: null,
+      advertencia: "",
+      select_assessor_mati: "",
+      select_assessor_vesprada: "",
+      seleccio: "",
+      dies: ['D','L','M','X','J','V','S'],
       meses_del_anyo: new Array(
         "gener",
         "febrer",
@@ -137,10 +287,105 @@ export default {
         "octubre",
         "novembre",
         "desembre"
-      )
+      ),
     };
   },
   methods: {
+    afegir_comentari(dia, mes, any) {
+      this.select_assessor_mati="";
+      this.select_assessor_vesprada="";
+      this.advertencia="";
+      this.seleccio="tots";
+      this.fetxa_edita = new Date(any, mes, dia);
+      this.dia_edt = this.fetxa_edita.getDay();
+      this.mes_edt = this.fetxa_edita.getWeek();
+      //alert(this.dia_edt + " " + this.mes_edt + " " + any);
+      $("#exampleModal").modal("show");
+    },
+    notifica(missatge) {
+                this.$toast.success(missatge, {
+                position: "top-right",
+                timeout: 4000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                closeButton: "button",
+                icon: true,
+                rtl: false,
+                hideProgressBar: false
+                });
+    },
+    async get_data_concret() {
+      this.id_editant = document.getElementById("seleccio").value;
+      //alert(id);
+      await axios
+        .get(
+          "/horario/" +
+            this.fetxa_edita.getWeek() +
+            "/" +
+            this.fetxa_edita.getFullYear() +
+            "/" +
+            this.id_editant
+        )
+        .then((response) => (this.editant = response.data))
+        .catch(function (error) {
+          console.log(error);
+        });
+      var este = Object.values(this.editant[0]);
+      //console.log(este);
+      this.select_assessor_mati=este[(this.dia_edt - 1) * 2];
+      this.select_assessor_vesprada=este[this.dia_edt * 2 - 1];
+    },
+    async envia_missatge() {
+        self = this;
+        let dd = this.fetxa_edita.getDate();
+        let mm = this.fetxa_edita.getMonth()+1;
+        const yyyy = this.fetxa_edita.getFullYear();
+        let dia_e = dd+"/"+mm+"/"+yyyy;
+        let missatge = "";
+        if (this.advertencia != ""){
+            missatge = "Advertencia del dia " + dia_e + ": "+this.advertencia;
+        }
+        let params = {
+            mati: this.select_assessor_mati,
+            vesprada: this.select_assessor_vesprada,
+            camp_mati: "TxtManyana"+this.dies[this.fetxa_edita.getDay()],
+            camp_vesprada: "TxtTarde"+this.dies[this.fetxa_edita.getDay()],
+            NidAsesor: this.seleccio,
+            NidSemana: this.fetxa_edita.getWeek(),
+            NidAnyo: this.fetxa_edita.getFullYear(),
+            missatge: missatge,
+        }
+        let url="afg_advertencia/";
+
+        axios.post(url,params)
+        .then(res => {
+            console.log(res);
+            self.notifica(res.data);
+        })
+        .catch(err => {
+            console.error(err);
+            self.notifica(err.data);
+        })
+
+
+    },
+    async agafa_datos_assesors() {
+      //alert(this.primer_dia);
+
+      await axios
+        .get("./assesors_tots")
+        .then((response) => (this.assesors = response.data))
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log(this.assesors);
+      this.assesors.sort(dynamicSort("name"));
+    },
+
     agafa_dia() {
       this.mes = this.avui.getMonth();
       this.any = this.avui.getFullYear();
@@ -162,34 +407,49 @@ export default {
       console.log(this.setmanes);
     },
     canvia_mes(mes_sum) {
-        this.check_eixida=false;
-        this.check_curs=false;
-        this.check_guardia=false;
-        this.check_compensa=false;
-        this.check_cefire=false;
+      this.check_eixida = false;
+      this.check_curs = false;
+      this.check_guardia = false;
+      this.check_compensa = false;
+      this.check_cefire = false;
       $(".concepte").remove();
       this.avui.setMonth(this.mes + mes_sum);
       this.agafa_dia();
     },
     posa_cefire(a, b, nombre) {
-      var str = "<div style='font-size:10px;' class='concepte cefire'>" + nombre + "</div>";
-      $("#s" + a + "d" + b +' .cefire2').append(str);
+      var str =
+        "<div style='font-size:10px;' class='concepte cefire'>" +
+        nombre +
+        "</div>";
+      $("#s" + a + "d" + b + " .cefire2").append(str);
     },
     posa_compensa(a, b, nombre) {
-      var str = "<div style='font-size:10px;' class='concepte compensa'>" + nombre + "</div>";
-      $("#s" + a + "d" + b +' .compensa2').append(str);
+      var str =
+        "<div style='font-size:10px;' class='concepte compensa'>" +
+        nombre +
+        "</div>";
+      $("#s" + a + "d" + b + " .compensa2").append(str);
     },
     posa_guardia(a, b, nombre) {
-      var str = "<div style='font-size:10px;' class='concepte guardia'>" + nombre + "</div>";
-      $("#s" + a + "d" + b +' .guardia2').append(str);
+      var str =
+        "<div style='font-size:10px;' class='concepte guardia'>" +
+        nombre +
+        "</div>";
+      $("#s" + a + "d" + b + " .guardia2").append(str);
     },
     posa_eixida(a, b, nombre) {
-      var str = "<div style='font-size:10px;' class='concepte eixida'>" + nombre + "</div>";
-      $("#s" + a + "d" + b +' .eixida2').append(str);
+      var str =
+        "<div style='font-size:10px;' class='concepte eixida'>" +
+        nombre +
+        "</div>";
+      $("#s" + a + "d" + b + " .eixida2").append(str);
     },
     posa_curs(a, b, nombre) {
-      var str = "<div style='font-size:10px;' class='concepte curs'>" + nombre + "</div>";
-      $("#s" + a + "d" + b +' .curs2').append(str);
+      var str =
+        "<div style='font-size:10px;' class='concepte curs'>" +
+        nombre +
+        "</div>";
+      $("#s" + a + "d" + b + " .curs2").append(str);
     },
     //////////////////EIXIDES///////////////////////////////////
     async agafa_datos_eixides() {
@@ -202,13 +462,13 @@ export default {
               "/" +
               this.avui.getFullYear()
           )
-          .then(response => (this.eixides = response.data))
-          .catch(function(error) {
+          .then((response) => (this.eixides = response.data))
+          .catch(function (error) {
             console.log(error);
           });
-        this.eixides.forEach(element => {
+        this.eixides.forEach((element) => {
           this.arr = Object.values(element);
-            console.log(this.arr);
+          console.log(this.arr);
           for (let index = 0; index < 14; index++) {
             if (
               this.arr[index].includes("eixida") ||
@@ -220,9 +480,8 @@ export default {
               this.arr[index].includes("Eix")
             ) {
               this.posa_eixida(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
+                set + 1,
+                Math.floor(index / 2 + 1) + (7 * set - this.primer_dia + 1),
                 this.arr[14]
               );
             }
@@ -241,13 +500,13 @@ export default {
               "/" +
               this.avui.getFullYear()
           )
-          .then(response => (this.eixides = response.data))
-          .catch(function(error) {
+          .then((response) => (this.eixides = response.data))
+          .catch(function (error) {
             console.log(error);
           });
-        this.eixides.forEach(element => {
+        this.eixides.forEach((element) => {
           this.arr = Object.values(element);
-            console.log(this.arr);
+          console.log(this.arr);
           for (let index = 0; index < 14; index++) {
             if (
               this.arr[index].includes("curs") ||
@@ -258,9 +517,8 @@ export default {
               this.arr[index].includes("PONEN")
             ) {
               this.posa_curs(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
+                set + 1,
+                Math.floor(index / 2 + 1) + (7 * set - this.primer_dia + 1),
                 this.arr[14]
               );
             }
@@ -275,19 +533,19 @@ export default {
         await axios
           .get(
             "/guardias/" +
-              (this.primer_dia_2.getWeek() + (set)) +
+              (this.primer_dia_2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
-          .then(response => (this.guardies = response.data))
-          .catch(function(error) {
+          .then((response) => (this.guardies = response.data))
+          .catch(function (error) {
             console.log(error);
           });
 
-               // console.log(this.guardies);
-        this.guardies.forEach(element => {
+        // console.log(this.guardies);
+        this.guardies.forEach((element) => {
           this.arr = Object.values(element);
-            console.log(this.arr);
+          console.log(this.arr);
           for (let index = 0; index < 14; index++) {
             if (
               this.arr[index].includes("guardia") ||
@@ -299,177 +557,161 @@ export default {
             ) {
               //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
               this.posa_guardia(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
+                set + 1,
+                Math.floor(index / 2 + 1) + (7 * set - this.primer_dia + 1),
                 this.arr[14]
               );
             }
             //this.posa_guardia(1,1,'aaa');
           }
         });
-
       }
     },
 
-
-///////////////guardies////////////////////////////77
+    ///////////////guardies////////////////////////////77
     async agafa_datos_compensa() {
       //alert(this.primer_dia);
       for (let set = 0; set < this.setmanes + 1; set++) {
         await axios
           .get(
             "/guardias/" +
-              (this.primer_dia_2.getWeek() + (set)) +
+              (this.primer_dia_2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
-          .then(response => (this.guardies = response.data))
-          .catch(function(error) {
+          .then((response) => (this.guardies = response.data))
+          .catch(function (error) {
             console.log(error);
           });
 
-               // console.log(this.guardies);
-        this.guardies.forEach(element => {
+        // console.log(this.guardies);
+        this.guardies.forEach((element) => {
           this.arr = Object.values(element);
-            console.log(this.arr);
+          console.log(this.arr);
           for (let index = 0; index < 14; index++) {
-            if (
-              this.arr[index].includes("COMPENSA")
-            ) {
-              var start_compensa=this.arr[index].indexOf("COMPENSA");
-              var end_compensa=this.arr[index].indexOf(")",start_compensa);
-              var str_compensa=this.arr[index].slice(start_compensa, end_compensa+1);
+            if (this.arr[index].includes("COMPENSA")) {
+              var start_compensa = this.arr[index].indexOf("COMPENSA");
+              var end_compensa = this.arr[index].indexOf(")", start_compensa);
+              var str_compensa = this.arr[index].slice(
+                start_compensa,
+                end_compensa + 1
+              );
 
               //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
               this.posa_compensa(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
-                this.arr[14].concat(": <b>",str_compensa,"</b>")
+                set + 1,
+                Math.floor(index / 2 + 1) + (7 * set - this.primer_dia + 1),
+                this.arr[14].concat(": <b>", str_compensa, "</b>")
               );
             }
             //this.posa_guardia(1,1,'aaa');
           }
         });
-
       }
     },
 
-
-///////////////cefire////////////////////////////77
+    ///////////////cefire////////////////////////////77
     async agafa_datos_cefire() {
       //alert(this.primer_dia);
       for (let set = 0; set < this.setmanes + 1; set++) {
         await axios
           .get(
             "/guardias/" +
-              (this.primer_dia_2.getWeek() + (set)) +
+              (this.primer_dia_2.getWeek() + set) +
               "/" +
               this.avui.getFullYear()
           )
-          .then(response => (this.guardies = response.data))
-          .catch(function(error) {
+          .then((response) => (this.guardies = response.data))
+          .catch(function (error) {
             console.log(error);
           });
 
-               // console.log(this.guardies);
-        this.guardies.forEach(element => {
+        // console.log(this.guardies);
+        this.guardies.forEach((element) => {
           this.arr = Object.values(element);
-            console.log(this.arr);
+          console.log(this.arr);
           for (let index = 0; index < 14; index++) {
-            if (
-              this.arr[index].includes("CEFIRE")
-            ) {
+            if (this.arr[index].includes("CEFIRE")) {
               //console.log((set)+' '+(Math.floor((index/2)+1)+(this.primer_dia+(set-1)*7))+' '+this.arr[14]);
               this.posa_cefire(
-                set+1,
-                Math.floor(index / 2 + 1) +
-                  (7 * (set) - this.primer_dia + 1),
+                set + 1,
+                Math.floor(index / 2 + 1) + (7 * set - this.primer_dia + 1),
                 this.arr[14]
               );
             }
             //this.posa_guardia(1,1,'aaa');
           }
         });
-
       }
-    }
-
-
-
+    },
   },
   watch: {
-      check_eixida(newValue, oldValue) {
-
-          if (this.check_eixida){
-              this.agafa_datos_eixides();
-          } else {
-              $(".eixida").remove();
-          }
-      },
-      check_guardia(newValue, oldValue) {
-
-          if (this.check_guardia){
-              this.agafa_datos_guardies();
-          } else {
-              $(".guardia").remove();
-          }
-      },
-      check_curs(newValue, oldValue) {
-
-          if (this.check_curs){
-              this.agafa_datos_curs();
-          } else {
-              $(".curs").remove();
-          }
-      },
-      check_compensa(newValue, oldValue) {
-
-          if (this.check_compensa){
-              this.agafa_datos_compensa();
-          } else {
-              $(".compensa").remove();
-          }
-      },
-      check_cefire(newValue, oldValue) {
-
-          if (this.check_cefire){
-              this.agafa_datos_cefire();
-          } else {
-              $(".cefire").remove();
-          }
+    check_eixida(newValue, oldValue) {
+      if (this.check_eixida) {
+        this.agafa_datos_eixides();
+      } else {
+        $(".eixida").remove();
       }
+    },
+    check_guardia(newValue, oldValue) {
+      if (this.check_guardia) {
+        this.agafa_datos_guardies();
+      } else {
+        $(".guardia").remove();
+      }
+    },
+    check_curs(newValue, oldValue) {
+      if (this.check_curs) {
+        this.agafa_datos_curs();
+      } else {
+        $(".curs").remove();
+      }
+    },
+    check_compensa(newValue, oldValue) {
+      if (this.check_compensa) {
+        this.agafa_datos_compensa();
+      } else {
+        $(".compensa").remove();
+      }
+    },
+    check_cefire(newValue, oldValue) {
+      if (this.check_cefire) {
+        this.agafa_datos_cefire();
+      } else {
+        $(".cefire").remove();
+      }
+    },
   },
-  mounted () {
-      this.agafa_dia();
+  mounted() {
+    this.agafa_dia();
+
+    this.agafa_datos_assesors();
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .eixida {
-    border: solid 1px blue;
+  border: solid 1px blue;
 }
 .guardia {
-    border: solid 1px red;
+  border: solid 1px red;
 }
 .curs {
-    border: solid 1px green;
+  border: solid 1px green;
 }
 .compensa {
-    border: solid 1px rgb(77, 47, 3);
+  border: solid 1px rgb(77, 47, 3);
 }
 .cefire {
-    border: solid 1px rgb(105, 7, 114);;
-  }
+  border: solid 1px rgb(105, 7, 114);
+}
 
 .wrapper {
   display: grid;
   grid-template-rows: 70px 1fr 70px;
   grid-template-columns: 1fr;
-  grid-template-areas:
-    "content";
+  grid-template-areas: "content";
   width: 100vw;
   height: 100vh;
 }
@@ -535,7 +777,6 @@ sidebar {
   display: none;
 }
 
-
 @media screen and (min-width: 850px) {
   sidebar {
     grid-template-areas:
@@ -593,8 +834,6 @@ sidebar {
 // //padding: 16px;
 // border-right: 1px solid #e1e1e1;
 // }
-
-
 
 /* COSMETIC STYLING */
 
@@ -699,33 +938,48 @@ sidebar {
 // border-right: 0;
 // }
 .guardia2 {
-    padding: 1px;
-    align-content: left;
-    color: red;
-  }
-  .eixida2 {
-    padding: 1px;
-    align-content: left;
-    color: blue;
-  }
-  .curs2 {
-    padding: 1px;
-    align-content: left;
-    color: green;
-  }
-  .compensa2 {
-    padding: 1px;
-    align-content: left;
-    color: rgb(77, 47, 3);;
-  }
+  padding: 1px;
+  align-content: left;
+  color: red;
+}
+.eixida2 {
+  padding: 1px;
+  align-content: left;
+  color: blue;
+}
+.curs2 {
+  padding: 1px;
+  align-content: left;
+  color: green;
+}
+.compensa2 {
+  padding: 1px;
+  align-content: left;
+  color: rgb(77, 47, 3);
+}
 .cefire2 {
-    padding: 1px;
-    align-content: left;
-    color: rgb(105, 7, 114);;
-  }
+  padding: 1px;
+  align-content: left;
+  color: rgb(105, 7, 114);
+}
 
+.controls {
+  display: inline-block;
+  padding: 5px;
+  height: 100%;
 
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: inline-flex;
 
+  // -webkit-flex-flow: row nowrap;
+  // -moz-flex-flow: row nowrap;
+  // flex-flow: row nowrap;
+
+  // -webkit-align-items: flex-start;
+  // -moz-align-items: flex-start;
+  // align-items: flex-start;
+}
 
 // .toggle {
 //   display: grid;

@@ -9,6 +9,7 @@ use App\Mail\EliminarGuardia;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Notificacions;
 use DateTime;
 
 class HorarioController extends Controller
@@ -77,6 +78,30 @@ class HorarioController extends Controller
             $horario->TxtTardeD=$request->TxtTardeD;
             $horario->TxtObservaciones=$request->TxtObservaciones;
             $horario->save();
+
+    }
+
+    /////CANVIAR CELDA EN CONCRET
+
+    public function afg_advertencia(Request $request)
+    {
+        //
+        if (auth()->user()->Perfil != 1) {
+            return ("¡No tens permís per a posar advertències!");
+        } else {
+            if($request->missatge != ""){
+                $notificacio=new Notificacions();
+                $notificacio->NidAsesor=$request->NidAsesor;
+                $notificacio->missatge=$request->missatge;
+                $notificacio->save();
+            }
+            $horario2=Horario::where('NidAsesor', $request->NidAsesor)->where('NidSemana',$request->NidSemana)->where('NidAnyo',$request->NidAnyo)->first();
+            $horario2->{$request->camp_mati}=$request->mati;
+            $horario2->{$request->camp_vesprada}=$request->vesprada;
+            $horario2->save();
+            return ("Dades guardades");
+        }
+
 
     }
 
@@ -414,7 +439,70 @@ class HorarioController extends Controller
     }
 
 
+    public function get_hora_anyo_concret(Request $request,$semana2,$anyo2,$ident2){
+        $horario=Horario::where('NidAsesor', $ident2)->where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
 
+        // $nota = App\Nota::find($id);
+        //Aquí valida si existe sino redirije al 404
+        //$nota = App\Nota::findOrFail($id);
+        //$horario=Horario::where('NidAsesor', $nidasesor2)->where('NidSemana',$semana2)->where('NidAnyo',$anyo2)->get();
+        //return $horario;
+        //$aux[]=$horario->toArray();
+
+        //var_dump($aux);
+
+        // foreach ($aux[0][0] as $key => $value) {
+        //     if (is_null($value)) {
+        //          $aux[0][0][$key] = "";
+        //     }
+        // }
+
+        //var_dump($horario[0]->NidSemana);
+        if (!$horario->isEmpty()){
+            return response()->json([
+                [
+                'TxtManyanaL' => $this->convertir($horario[0]->TxtManyanaL),
+                'TxtTardeL' => $this->convertir($horario[0]->TxtTardeL),
+                'TxtManyanaM' => $this->convertir($horario[0]->TxtManyanaM),
+                'TxtTardeM' => $this->convertir($horario[0]->TxtTardeM),
+                'TxtManyanaX' => $this->convertir($horario[0]->TxtManyanaX),
+                'TxtTardeX' => $this->convertir($horario[0]->TxtTardeX),
+                'TxtManyanaJ' => $this->convertir($horario[0]->TxtManyanaJ),
+                'TxtTardeJ' => $this->convertir($horario[0]->TxtTardeJ),
+                'TxtManyanaV' => $this->convertir($horario[0]->TxtManyanaV),
+                'TxtTardeV' => $this->convertir($horario[0]->TxtTardeV),
+                'TxtManyanaS' => $this->convertir($horario[0]->TxtManyanaS),
+                'TxtTardeS' => $this->convertir($horario[0]->TxtTardeS),
+                'TxtManyanaD' => $this->convertir($horario[0]->TxtManyanaD),
+                'TxtTardeD' => $this->convertir($horario[0]->TxtTardeD),
+                'NidAnyo' => $this->convertir($horario[0]->NidAnyo),
+                'NidSemana' => $this->convertir($horario[0]->NidSemana),
+                'TxtObservaciones' => $this->convertir($horario[0]->TxtObservaciones)]
+            ]);
+        } else {
+            return response()->json([
+                [
+                'TxtManyanaL' => '',
+                'TxtTardeL' => '',
+                'TxtManyanaM' => '',
+                'TxtTardeM' => '',
+                'TxtManyanaX' => '',
+                'TxtTardeX' => '',
+                'TxtManyanaJ' => '',
+                'TxtTardeJ' => '',
+                'TxtManyanaV' => '',
+                'TxtTardeV' => '',
+                'TxtManyanaS' => '',
+                'TxtTardeS' => '',
+                'TxtManyanaD' => '',
+                'TxtTardeD' => '',
+                'NidAnyo' => 0,
+                'NidSemana' => 0,
+                'TxtObservaciones' => '']
+            ]);
+        }
+        //return view('notas.detalle', compact('nota'));
+    }
 
 
     public function get_todas_guardias(Request $request,$semana2,$anyo2){

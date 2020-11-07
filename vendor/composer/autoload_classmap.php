@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Asesores' => $baseDir . '/app/Asesores.php',
+    'App\\Centres' => $baseDir . '/app/Centres.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Horario' => $baseDir . '/app/Horario.php',
@@ -16,10 +17,12 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
+    'App\\Http\\Controllers\\CentresController' => $baseDir . '/app/Http/Controllers/CentresController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\EstadisticasController' => $baseDir . '/app/Http/Controllers/EstadisticasController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\HorarioController' => $baseDir . '/app/Http/Controllers/HorarioController.php',
+    'App\\Http\\Controllers\\NoticacionsController' => $baseDir . '/app/Http/Controllers/NoticacionsController.php',
     'App\\Http\\Controllers\\PermisosController' => $baseDir . '/app/Http/Controllers/PermisosController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -33,6 +36,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Mail\\EliminarGuardia' => $baseDir . '/app/Mail/EliminarGuardia.php',
     'App\\Mail\\EnviarGuardia' => $baseDir . '/app/Mail/EnviarGuardia.php',
+    'App\\Notificacions' => $baseDir . '/app/Notificacions.php',
     'App\\Permisos' => $baseDir . '/app/Permisos.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

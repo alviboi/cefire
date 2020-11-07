@@ -98,11 +98,11 @@
         </nav>
         <div class="copyright">copyright &copy; 2018</div>
       </sidebar> -->
-      <div>
+      <!-- <div>
 
       <button class="btn btn-primary" @click="posa_guardia(6, 31, 47, 'M');">Este</button>
 
-      </div>
+      </div> -->
     </div>
 
   </div>

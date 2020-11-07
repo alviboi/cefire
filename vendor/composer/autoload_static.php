@@ -486,6 +486,7 @@ class ComposerStaticInit449c95f5e86f7fdbbe276c29822000c8
 
     public static $classMap = array (
         'App\\Asesores' => __DIR__ . '/../..' . '/app/Asesores.php',
+        'App\\Centres' => __DIR__ . '/../..' . '/app/Centres.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Horario' => __DIR__ . '/../..' . '/app/Horario.php',
@@ -495,10 +496,12 @@ class ComposerStaticInit449c95f5e86f7fdbbe276c29822000c8
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\CentresController' => __DIR__ . '/../..' . '/app/Http/Controllers/CentresController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EstadisticasController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadisticasController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\HorarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/HorarioController.php',
+        'App\\Http\\Controllers\\NoticacionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NoticacionsController.php',
         'App\\Http\\Controllers\\PermisosController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermisosController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -512,6 +515,7 @@ class ComposerStaticInit449c95f5e86f7fdbbe276c29822000c8
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\EliminarGuardia' => __DIR__ . '/../..' . '/app/Mail/EliminarGuardia.php',
         'App\\Mail\\EnviarGuardia' => __DIR__ . '/../..' . '/app/Mail/EnviarGuardia.php',
+        'App\\Notificacions' => __DIR__ . '/../..' . '/app/Notificacions.php',
         'App\\Permisos' => __DIR__ . '/../..' . '/app/Permisos.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
